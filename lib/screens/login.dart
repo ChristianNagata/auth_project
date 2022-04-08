@@ -1,7 +1,13 @@
+import 'package:auth_project/authentication_service.dart';
+import 'package:auth_project/main.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'home.dart';
 
 class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +26,22 @@ class Login extends StatelessWidget {
                 'Fazer login',
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 32),
+              Padding(
+                padding: const EdgeInsets.only(top: 32),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: emailController,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Digite seu email',
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 16),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
                 child: TextField(
+                  controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Digite sua senha',
                   ),
@@ -42,7 +50,23 @@ class Login extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    context
+                        .read<AuthenticationService>()
+                        .signIn(
+                          email: emailController.text.trim(),
+                          password: passwordController.text.trim(),
+                        )
+                        .then((response) => {
+                              if (response == 'Successful')
+                                {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AuthenticationWrapper()))
+                                }
+                            });
+                  },
                   child: const Text('Entrar'),
                   style: Theme.of(context).elevatedButtonTheme.style,
                 ),

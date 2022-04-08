@@ -7,6 +7,7 @@ class Welcome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 360,
@@ -27,7 +28,7 @@ class Welcome extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SignUp(),
+                        builder: (context) => SignUp(),
                       ),
                     );
                   },
@@ -41,7 +42,7 @@ class Welcome extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Login(),
+                          builder: (context) => Login(),
                         ),
                       );
                     },

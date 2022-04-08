@@ -1,7 +1,14 @@
+import 'package:auth_project/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../authentication_service.dart';
+import '../main.dart';
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController password1Controller = TextEditingController();
+  final TextEditingController password2Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,30 +27,33 @@ class SignUp extends StatelessWidget {
                 'Cadastre-se',
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 32),
+              Padding(
+                padding: const EdgeInsets.only(top: 32),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: emailController,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Digite seu email',
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 16),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
                 child: TextField(
+                  controller: password1Controller,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Digite sua senha',
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 16),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
                 child: TextField(
+                  controller: password2Controller,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Confirme sua senha',
                   ),
@@ -52,10 +62,31 @@ class SignUp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Cadastrar'),
-                  style: Theme.of(context).elevatedButtonTheme.style,
-                ),
+                    onPressed: () async {
+                      context
+                          .read<AuthenticationService>()
+                          .signUp(
+                            email: emailController.text.trim(),
+                            password1: password1Controller.text.trim(),
+                            password2: password2Controller.text.trim(),
+                          )
+                          .then(
+                            (response) => {
+                              if (response == 'Successful')
+                                {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AuthenticationWrapper(),
+                                    ),
+                                  ),
+                                }
+                            },
+                          );
+                    },
+                    child: const Text('Cadastrar'),
+                    style: Theme.of(context).elevatedButtonTheme.style),
               )
             ],
           ),
