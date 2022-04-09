@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +10,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = FirebaseAuth.instance.currentUser;
+    String? userEmail = user?.email;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -19,7 +24,7 @@ class Home extends StatelessWidget {
           padding: const EdgeInsets.only(top: 64),
           child: Center(child: Column(
             children: [
-              const Text('Home screen'),
+              Text(userEmail!),
               Padding(
                 padding: const EdgeInsets.only(top: 48),
                 child: ElevatedButton(

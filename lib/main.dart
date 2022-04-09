@@ -62,13 +62,15 @@ class AuthProject extends StatelessWidget {
             )
           )
         ),
-        home: AuthenticationWrapper(),
+        home: const AuthenticationWrapper(),
       ),
     );
   }
 }
 
 class AuthenticationWrapper extends StatelessWidget {
+  const AuthenticationWrapper({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User?>();

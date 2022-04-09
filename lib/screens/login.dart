@@ -3,11 +3,11 @@ import 'package:auth_project/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'home.dart';
-
 class Login extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,7 @@ class Login extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 32),
                 child: TextField(
                   controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Digite seu email',
@@ -63,7 +64,8 @@ class Login extends StatelessWidget {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => AuthenticationWrapper()))
+                                          builder: (context) =>
+                                              const AuthenticationWrapper()))
                                 }
                             });
                   },

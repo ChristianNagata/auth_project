@@ -1,7 +1,5 @@
-import 'package:auth_project/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../authentication_service.dart';
 import '../main.dart';
 
@@ -9,6 +7,8 @@ class SignUp extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController password1Controller = TextEditingController();
   final TextEditingController password2Controller = TextEditingController();
+
+  SignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class SignUp extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 32),
                 child: TextField(
                   controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Digite seu email',
@@ -78,7 +79,7 @@ class SignUp extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          AuthenticationWrapper(),
+                                          const AuthenticationWrapper(),
                                     ),
                                   ),
                                 }

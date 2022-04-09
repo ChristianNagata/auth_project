@@ -46,5 +46,6 @@ class AuthenticationService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 }
