@@ -1,3 +1,4 @@
+import 'package:auth_project/screens/products.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -23,7 +24,8 @@ class Home extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 64),
-          child: Center(child: Column(
+          child: Center(
+              child: Column(
             children: [
               Text(userEmail!),
               Padding(
@@ -43,6 +45,19 @@ class Home extends StatelessWidget {
                     FirebaseCrashlytics.instance.crash();
                   },
                   child: const Text('Crash test'),
+                  style: Theme.of(context).elevatedButtonTheme.style,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 48),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Products()),
+                    );
+                  },
+                  child: const Text('Products'),
                   style: Theme.of(context).elevatedButtonTheme.style,
                 ),
               ),
