@@ -3,12 +3,22 @@ import 'package:provider/provider.dart';
 import '../authentication_service.dart';
 import '../main.dart';
 
-class SignUp extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController password1Controller = TextEditingController();
-  final TextEditingController password2Controller = TextEditingController();
+class SignUp extends StatefulWidget {
 
   SignUp({Key? key}) : super(key: key);
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController password1Controller = TextEditingController();
+
+  final TextEditingController password2Controller = TextEditingController();
+
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +52,19 @@ class SignUp extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16),
                 child: TextField(
                   controller: password1Controller,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                  obscureText: _isObscure,
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
                     hintText: 'Digite sua senha',
+                    suffixIcon: IconButton(
+                        icon: Icon(_isObscure
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        }),
                   ),
                 ),
               ),
@@ -53,10 +72,19 @@ class SignUp extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16),
                 child: TextField(
                   controller: password2Controller,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                  obscureText: _isObscure,
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
                     hintText: 'Confirme sua senha',
+                    suffixIcon: IconButton(
+                        icon: Icon(_isObscure
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        }),
                   ),
                 ),
               ),

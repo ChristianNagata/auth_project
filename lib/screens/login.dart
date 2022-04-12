@@ -2,12 +2,22 @@ import 'package:auth_project/authentication_service.dart';
 import 'package:auth_project/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:passwordfield/passwordfield.dart';
 
-class Login extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+class Login extends StatefulWidget {
 
   Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +51,19 @@ class Login extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16),
                 child: TextField(
                   controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
+                  obscureText: _isObscure,
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
                     hintText: 'Digite sua senha',
+                    suffixIcon: IconButton(
+                        icon: Icon(_isObscure
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        }),
                   ),
                 ),
               ),
