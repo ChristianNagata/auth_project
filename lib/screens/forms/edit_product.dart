@@ -1,19 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class ProductForm extends StatelessWidget {
+class EditProductForm extends StatelessWidget {
+  final DocumentSnapshot documentSnapshot;
 
-  var nome = '';
-  var preco = 0.0;
+  const EditProductForm({Key? key, required this.documentSnapshot}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    var nome = documentSnapshot['nome'];
+    var preco = documentSnapshot['preco'].toString();
+
     CollectionReference products =
         FirebaseFirestore.instance.collection('produtos');
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product form'),
+        title: const Text('Edit product'),
         elevation: 0,
         toolbarHeight: 80,
       ),
@@ -23,6 +27,7 @@ class ProductForm extends StatelessWidget {
           child: Column(
             children: [
               TextFormField(
+                initialValue: nome,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: "Digite o nome",
@@ -32,14 +37,15 @@ class ProductForm extends StatelessWidget {
                 },
               ),
               Padding(
-                padding: EdgeInsets.only(top: 16),
+                padding: const EdgeInsets.only(top: 16),
                 child: TextFormField(
+                  initialValue: preco,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "Digite o preço",
                   ),
                   onChanged: (value) {
-                    preco = double.parse(value);
+                    preco = value;
                   },
                 ),
               ),
@@ -48,10 +54,12 @@ class ProductForm extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     products
-                        .add({'nome': nome.trim(), 'preco': preco})
-                        .then((value) => print('Product added'))
-                        .catchError(
-                            (error) => print('Failed to add product: $error'));
+                          .doc(documentSnapshot.id)
+                          .update({'nome': nome, 'preco': preco})
+                          .then((value) => print("Product Updated"))
+                          .catchError((error) =>
+                              print("Failed to update product: $error"));
+
                     Navigator.pop(context);
                   },
                   child: const Text('Salvar'),
