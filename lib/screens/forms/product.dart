@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProductForm extends StatelessWidget {
 
   var nome = '';
   var preco = 0.0;
+  var uid = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class ProductForm extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     products
-                        .add({'nome': nome.trim(), 'preco': preco})
+                        .add({'nome': nome.trim(), 'preco': preco, 'uid': uid})
                         .then((value) => print('Product added'))
                         .catchError(
                             (error) => print('Failed to add product: $error'));
