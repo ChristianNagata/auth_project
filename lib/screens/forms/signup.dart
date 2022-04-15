@@ -1,10 +1,11 @@
+import 'package:auth_project/screens/forms/store_informations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../authentication_service.dart';
-import '../main.dart';
+import '../../authentication_service.dart';
+import '../../main.dart';
 
 class SignUp extends StatefulWidget {
-
   SignUp({Key? key}) : super(key: key);
 
   @override
@@ -13,15 +14,15 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController password1Controller = TextEditingController();
-
   final TextEditingController password2Controller = TextEditingController();
 
   bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference lojas = FirebaseFirestore.instance.collection('lojas');
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign-up'),
@@ -92,29 +93,23 @@ class _SignUpState extends State<SignUp> {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                     onPressed: () async {
-                      context
-                          .read<AuthenticationService>()
-                          .signUp(
-                            email: emailController.text.trim(),
-                            password1: password1Controller.text.trim(),
-                            password2: password2Controller.text.trim(),
-                          )
-                          .then(
-                            (response) => {
-                              if (response == 'Successful')
-                                {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AuthenticationWrapper(),
-                                    ),
-                                  ),
-                                }
-                            },
-                          );
+                      String? response =
+                          await context.read<AuthenticationService>().signUp(
+                                email: emailController.text.trim(),
+                                password1: password1Controller.text.trim(),
+                                password2: password2Controller.text.trim(),
+                              );
+
+                      if (response == 'Successful') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StoreInformations(),
+                          ),
+                        );
+                      }
                     },
-                    child: const Text('Cadastrar'),
+                    child: const Text('Próximo'),
                     style: Theme.of(context).elevatedButtonTheme.style),
               )
             ],

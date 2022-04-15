@@ -1,6 +1,7 @@
 import 'package:auth_project/authentication_service.dart';
 import 'package:auth_project/screens/home.dart';
 import 'package:auth_project/screens/welcome.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,12 +34,13 @@ class AuthProject extends StatelessWidget {
           create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
         StreamProvider(create: (context) => context.read<AuthenticationService>().authStateChanges, initialData: null,),
+        Provider<FirebaseFirestore>(create: (context) => FirebaseFirestore.instance)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           appBarTheme: const AppBarTheme(
-            color: Colors.orangeAccent,
+            color: Colors.redAccent,
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(

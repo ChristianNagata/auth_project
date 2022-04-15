@@ -1,9 +1,9 @@
 import 'package:auth_project/screens/products.dart';
+import 'package:auth_project/screens/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../authentication_service.dart';
 
 class Home extends StatelessWidget {
@@ -31,6 +31,19 @@ class Home extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 48),
                 child: ElevatedButton(
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Profile()),
+                    );
+                  },
+                  child: const Text('Profile'),
+                  style: Theme.of(context).elevatedButtonTheme.style,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 48),
+                child: ElevatedButton(
+                  onPressed: () {
                     context.read<AuthenticationService>().signOut();
                   },
                   child: const Text('Sign out'),
@@ -53,7 +66,7 @@ class Home extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Products()),
+                      MaterialPageRoute(builder: (context) => Products()),
                     );
                   },
                   child: const Text('Products'),

@@ -1,5 +1,5 @@
-import 'package:auth_project/screens/login.dart';
-import 'package:auth_project/screens/signup.dart';
+import 'package:auth_project/screens/forms/login.dart';
+import 'package:auth_project/screens/forms/signup.dart';
 import 'package:flutter/material.dart';
 
 class Welcome extends StatelessWidget {

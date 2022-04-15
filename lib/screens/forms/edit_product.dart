@@ -1,20 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class EditProductForm extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
+  final User user;
 
-  const EditProductForm({Key? key, required this.documentSnapshot})
+  const EditProductForm(
+      {Key? key, required this.documentSnapshot, required this.user})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     var nome = documentSnapshot['nome'];
     var preco = documentSnapshot['preco'].toString();
 
-    CollectionReference products =
-        FirebaseFirestore.instance.collection('produtos');
+    var product = FirebaseFirestore.instance
+        .collection('lojas')
+        .doc(user.uid)
+        .collection('produtos')
+        .doc(documentSnapshot.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -60,8 +65,7 @@ class EditProductForm extends StatelessWidget {
                       child: ElevatedButton(
                         child: const Text('Salvar'),
                         onPressed: () {
-                          products
-                              .doc(documentSnapshot.id)
+                          product
                               .update({'nome': nome, 'preco': preco})
                               .then((value) => print("Product Updated"))
                               .catchError((error) =>
@@ -77,11 +81,11 @@ class EditProductForm extends StatelessWidget {
                         backgroundColor: MaterialStateProperty.all(Colors.red),
                       ),
                       onPressed: () {
-                        products
-                            .doc(documentSnapshot.id)
+                        product
                             .delete()
-                            .then((value) => print("User Deleted"))
-                            .catchError((error) => print("Failed to delete user: $error"));
+                            .then((value) => print("Product Deleted"))
+                            .catchError((error) =>
+                                print("Failed to delete product: $error"));
                         Navigator.pop(context);
                       },
                     ),
