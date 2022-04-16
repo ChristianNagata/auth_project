@@ -2,7 +2,7 @@ import 'package:auth_project/screens/forms/store_informations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../authentication_service.dart';
+import '../../firebase_services/authentication_service.dart';
 import '../../main.dart';
 
 class SignUp extends StatefulWidget {

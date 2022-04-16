@@ -1,5 +1,12 @@
-import 'package:auth_project/authentication_service.dart';
+import 'package:auth_project/firebase_services/authentication_service.dart';
+import 'package:auth_project/providers/product_provider.dart';
+import 'package:auth_project/screens/forms/edit_product.dart';
+import 'package:auth_project/screens/forms/login.dart';
+import 'package:auth_project/screens/forms/product.dart';
+import 'package:auth_project/screens/forms/signup.dart';
 import 'package:auth_project/screens/home.dart';
+import 'package:auth_project/screens/products.dart';
+import 'package:auth_project/screens/profile.dart';
 import 'package:auth_project/screens/welcome.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,7 +41,7 @@ class AuthProject extends StatelessWidget {
           create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
         StreamProvider(create: (context) => context.read<AuthenticationService>().authStateChanges, initialData: null,),
-        Provider<FirebaseFirestore>(create: (context) => FirebaseFirestore.instance)
+        ChangeNotifierProvider.value(value: ProductProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

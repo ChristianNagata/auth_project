@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../authentication_service.dart';
+import '../firebase_services/authentication_service.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
