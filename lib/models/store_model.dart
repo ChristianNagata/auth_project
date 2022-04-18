@@ -1,8 +1,9 @@
 class StoreModel {
-  String nome, categoria, cnpj, local;
+  String id, nome, categoria, cnpj, local;
 
   StoreModel({
-    required this.cnpj, // id
+    required this.id, // == user id
+    required this.cnpj,
     required this.nome,
     required this.categoria,
     required this.local,
@@ -10,6 +11,7 @@ class StoreModel {
 
   Map<String, dynamic> createMap() {
     return {
+      'id': id,
       'nome': nome,
       'categoria': categoria,
       'cnpj': cnpj,
@@ -19,6 +21,7 @@ class StoreModel {
 
   factory StoreModel.fromFirestore(Map<String, dynamic> firestoreMap) {
     return StoreModel(
+      id: firestoreMap['id'],
       nome: firestoreMap['nome'],
       categoria: firestoreMap['categoria'],
       cnpj: firestoreMap['cnpj'],

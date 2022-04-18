@@ -1,25 +1,23 @@
+import 'package:auth_project/providers/product_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EditProductForm extends StatelessWidget {
   final DocumentSnapshot documentSnapshot;
-  final User user;
 
-  const EditProductForm(
-      {Key? key, required this.documentSnapshot, required this.user})
+  const EditProductForm({Key? key, required this.documentSnapshot})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var nome = documentSnapshot['nome'];
-    var preco = documentSnapshot['preco'].toString();
+    String nome = documentSnapshot['nome'];
+    double preco = documentSnapshot['preco'];
+    String cor = documentSnapshot['cor'];
+    String descricao = documentSnapshot['descricao'];
+    int estoque = documentSnapshot['estoque'];
 
-    var product = FirebaseFirestore.instance
-        .collection('lojas')
-        .doc(user.uid)
-        .collection('produtos')
-        .doc(documentSnapshot.id);
+    var product = Provider.of<ProductProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -45,13 +43,52 @@ class EditProductForm extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: TextFormField(
-                  initialValue: preco,
+                  initialValue: preco.toString(),
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "Digite o preço",
                   ),
                   onChanged: (value) {
-                    preco = value;
+                    preco = double.parse(value);
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: TextFormField(
+                  initialValue: cor,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Cor do produto",
+                  ),
+                  onChanged: (value) {
+                    cor = value;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: TextFormField(
+                  initialValue: estoque.toString(),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Quantidade em estoque",
+                  ),
+                  onChanged: (value) {
+                    estoque = int.parse(value);
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: TextFormField(
+                  initialValue: descricao,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Descrição",
+                  ),
+                  onChanged: (value) {
+                    descricao = value;
                   },
                 ),
               ),
@@ -65,12 +102,14 @@ class EditProductForm extends StatelessWidget {
                       child: ElevatedButton(
                         child: const Text('Salvar'),
                         onPressed: () {
-                          product
-                              .update({'nome': nome, 'preco': preco})
-                              .then((value) => print("Product Updated"))
-                              .catchError((error) =>
-                                  print("Failed to update product: $error"));
-
+                          product.changeAll(
+                            nome,
+                            preco,
+                            estoque,
+                            cor,
+                            descricao,
+                          );
+                          product.saveData();
                           Navigator.pop(context);
                         },
                       ),
@@ -81,11 +120,7 @@ class EditProductForm extends StatelessWidget {
                         backgroundColor: MaterialStateProperty.all(Colors.red),
                       ),
                       onPressed: () {
-                        product
-                            .delete()
-                            .then((value) => print("Product Deleted"))
-                            .catchError((error) =>
-                                print("Failed to delete product: $error"));
+                        product.removeData();
                         Navigator.pop(context);
                       },
                     ),

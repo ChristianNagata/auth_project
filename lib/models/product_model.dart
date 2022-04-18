@@ -4,6 +4,7 @@ class ProductModel {
   double preco;
   int estoque;
   String cor;
+  String descricao;
 
   ProductModel({
     required this.id,
@@ -11,6 +12,7 @@ class ProductModel {
     required this.preco,
     required this.estoque,
     required this.cor,
+    required this.descricao,
   });
 
   Map<String, dynamic> createMap() {
@@ -20,6 +22,7 @@ class ProductModel {
       'preco': preco,
       'estoque': estoque,
       'cor': cor,
+      'descricao': descricao,
     };
   }
 
@@ -30,6 +33,7 @@ class ProductModel {
       preco: firestoreMap['preco'],
       estoque: firestoreMap['estoque'],
       cor: firestoreMap['cor'],
+      descricao: firestoreMap['descricao']
     );
   }
 

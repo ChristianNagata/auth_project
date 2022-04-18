@@ -1,41 +1,38 @@
-import 'package:auth_project/screens/forms/edit_product.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:auth_project/models/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+
 import 'forms/product.dart';
 
-
 class Products extends StatelessWidget {
-  Widget _buildListItem(BuildContext context, DocumentSnapshot document, User user) {
+  Widget _buildListItem(BuildContext context, ProductModel document) {
     return ListTile(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(document['nome']),
+          Text(document.nome),
           const Icon(
             Icons.edit_outlined,
             size: 16,
           ),
         ],
       ),
-      subtitle: Text("\$${document['preco']}"),
+      subtitle: Text("\$${document.preco}"),
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EditProductForm(documentSnapshot: document, user: user),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => EditProductForm(documentSnapshot: document),
+        //   ),
+        // );
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    var user = FirebaseAuth.instance.currentUser;
-    final Stream<QuerySnapshot> myProducts = FirebaseFirestore.instance
-        .collection('lojas').doc(user!.uid).collection('produtos')
-        .snapshots();
+    final List<ProductModel>? myProducts =
+        Provider.of<List<ProductModel>?>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -43,18 +40,14 @@ class Products extends StatelessWidget {
         elevation: 0,
         toolbarHeight: 80,
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: myProducts,
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) return const Text('Loading...');
-          return ListView.builder(
-            itemExtent: 80,
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) =>
-                _buildListItem(context, snapshot.data!.docs[index], user),
-          );
-        },
-      ),
+      body: myProducts == null
+          ? const Text('Loading...')
+          : ListView.builder(
+              itemExtent: 80,
+              itemCount: myProducts.length,
+              itemBuilder: (context, index) =>
+                  _buildListItem(context, myProducts[index]),
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(

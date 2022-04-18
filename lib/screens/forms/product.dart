@@ -1,20 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:auth_project/providers/product_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductForm extends StatelessWidget {
-
   var nome = '';
   var preco = 0.0;
   var cor = '';
   var descricao = '';
   var estoque = 1;
-  var uid = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference products =
-        FirebaseFirestore.instance.collection('lojas').doc(uid).collection('produtos');
+    var productProvider = Provider.of<ProductProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -88,11 +85,14 @@ class ProductForm extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                   onPressed: () {
-                    products
-                        .add({'nome': nome.trim(), 'preco': preco, 'uid': uid})
-                        .then((value) => print('Product added'))
-                        .catchError(
-                            (error) => print('Failed to add product: $error'));
+                    productProvider.changeAll(
+                      nome,
+                      preco,
+                      estoque,
+                      cor,
+                      descricao,
+                    );
+                    productProvider.saveData();
                     Navigator.pop(context);
                   },
                   child: const Text('Salvar'),

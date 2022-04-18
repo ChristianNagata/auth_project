@@ -1,9 +1,7 @@
 import 'package:auth_project/screens/forms/store_informations.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../firebase_services/authentication_service.dart';
-import '../../main.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -21,7 +19,6 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference lojas = FirebaseFirestore.instance.collection('lojas');
 
     return Scaffold(
       appBar: AppBar(
