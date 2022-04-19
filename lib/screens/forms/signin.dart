@@ -1,16 +1,15 @@
 import 'package:auth_project/firebase_services/authentication_service.dart';
-import 'package:auth_project/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Login extends StatefulWidget {
-  Login({Key? key}) : super(key: key);
+class SignIn extends StatefulWidget {
+  SignIn({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _LoginState extends State<Login> {
+class _SignInState extends State<SignIn> {
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
@@ -69,22 +68,15 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                   onPressed: () async {
-                    context
-                        .read<AuthenticationService>()
-                        .signIn(
-                          email: emailController.text.trim(),
-                          password: passwordController.text.trim(),
-                        )
-                        .then((response) => {
-                              if (response == 'Successful')
-                                {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const AuthenticationWrapper()))
-                                }
-                            });
+                    String? response =
+                        await context.read<AuthenticationService>().signIn(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            );
+                    (response == 'Successful')
+                        ? Navigator.of(context)
+                            .pushNamed('/authenticationWrapper')
+                        : null;
                   },
                   child: const Text('Entrar'),
                   style: Theme.of(context).elevatedButtonTheme.style,

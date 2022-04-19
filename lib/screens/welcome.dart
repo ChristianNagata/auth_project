@@ -1,5 +1,3 @@
-import 'package:auth_project/screens/forms/login.dart';
-import 'package:auth_project/screens/forms/signup.dart';
 import 'package:flutter/material.dart';
 
 class Welcome extends StatelessWidget {
@@ -25,12 +23,7 @@ class Welcome extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SignUp(),
-                      ),
-                    );
+                    Navigator.of(context).pushNamed('/signUp');
                   },
                   child: const Text('Ainda não tenho conta'),
                   style: Theme.of(context).elevatedButtonTheme.style,
@@ -39,12 +32,7 @@ class Welcome extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 16),
                   child: TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Login(),
-                        ),
-                      );
+                      Navigator.of(context).pushNamed('/signIn');
                     },
                     child: const Text('Já tenho conta'),
                     style: Theme.of(context).textButtonTheme.style,

@@ -2,8 +2,6 @@ import 'package:auth_project/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'forms/product.dart';
-
 class Products extends StatelessWidget {
   Widget _buildListItem(BuildContext context, ProductModel document) {
     return ListTile(
@@ -19,12 +17,10 @@ class Products extends StatelessWidget {
       ),
       subtitle: Text("\$${document.preco}"),
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => EditProductForm(documentSnapshot: document),
-        //   ),
-        // );
+        Navigator.of(context).pushNamed(
+          '/editProductForm',
+          arguments: document,
+        );
       },
     );
   }
@@ -50,10 +46,7 @@ class Products extends StatelessWidget {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ProductForm()),
-          );
+          Navigator.of(context).pushNamed('/productForm');
         },
         child: const Icon(Icons.add),
       ),

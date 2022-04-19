@@ -1,5 +1,4 @@
-import 'package:auth_project/screens/products.dart';
-import 'package:auth_project/screens/profile.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +30,7 @@ class Home extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 48),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Profile()),
-                    );
+                    Navigator.of(context).pushNamed('/profile');
                   },
                   child: const Text('Profile'),
                   style: Theme.of(context).elevatedButtonTheme.style,
@@ -64,10 +60,7 @@ class Home extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 48),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Products()),
-                    );
+                    Navigator.of(context).pushNamed('/products');
                   },
                   child: const Text('Products'),
                   style: Theme.of(context).elevatedButtonTheme.style,

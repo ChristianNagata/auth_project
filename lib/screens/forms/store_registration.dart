@@ -3,14 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../main.dart';
 
-class StoreInformations extends StatefulWidget {
-  StoreInformations({Key? key}) : super(key: key);
+class StoreRegistration extends StatefulWidget {
+  StoreRegistration({Key? key}) : super(key: key);
 
   @override
-  State<StoreInformations> createState() => _SignUpState();
+  State<StoreRegistration> createState() => _SignUpState();
 }
 
-class _SignUpState extends State<StoreInformations> {
+class _SignUpState extends State<StoreRegistration> {
   final TextEditingController storeNameController = TextEditingController();
   final TextEditingController storeCNPJController = TextEditingController();
   final TextEditingController storeCategoryController = TextEditingController();

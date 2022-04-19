@@ -1,10 +1,13 @@
+import 'package:auth_project/firebase_services/authentication_service.dart';
 import 'package:auth_project/models/product_model.dart';
+import 'package:auth_project/repositories/product.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
-import '../firebase_services/firestore_service.dart';
+import '../db/db_firestore.dart';
 
 class ProductProvider with ChangeNotifier {
-  final service = FirestoreService();
+  late AuthenticationService auth;
+  //final service = ProductRepository(auth: auth);
   var uuid = const Uuid();
 
   late String _id;
@@ -76,7 +79,7 @@ class ProductProvider with ChangeNotifier {
       cor: getCor,
       descricao: getDescricao,
     );
-    service.saveProduct(saveProduct);
+    // service.saveProduct(saveProduct);
     notifyListeners();
   }
 
@@ -89,12 +92,12 @@ class ProductProvider with ChangeNotifier {
       cor: _cor,
       descricao: _descricao,
     );
-    service.updateProduct(updateProduct);
+    // service.updateProduct(updateProduct);
     notifyListeners();
   }
 
   void removeData() {
-    service.removeItem(_id);
+    // service.removeItem(_id);
     notifyListeners();
   }
 }

@@ -1,9 +1,9 @@
 import 'package:auth_project/firebase_services/authentication_service.dart';
-import 'package:auth_project/firebase_services/firestore_service.dart';
 import 'package:auth_project/providers/product_provider.dart';
 import 'package:auth_project/providers/store_provider.dart';
+import 'package:auth_project/repositories/product.dart';
+import 'package:auth_project/route_generator.dart';
 import 'package:auth_project/screens/home.dart';
-import 'package:auth_project/screens/products.dart';
 import 'package:auth_project/screens/welcome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,8 +31,7 @@ class AuthProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
+    final firebaseUser = context.watch<User?>();
     return MultiProvider(
       providers: [
         Provider<AuthenticationService>(
@@ -44,11 +43,18 @@ class AuthProject extends StatelessWidget {
               context.read<AuthenticationService>().authStateChanges,
           initialData: null,
         ),
-
         ChangeNotifierProvider.value(value: ProductProvider()),
         ChangeNotifierProvider.value(value: StoreProvider()),
+        // ChangeNotifierProvider(
+        //   create: (context) => ProductRepository(
+        //     auth: context.read<AuthenticationService>(),
+        //   ),
+        // ),
 
-
+        StreamProvider<List<ProductModel>?>.value(
+          value: context.read<ProductRepository>().readProducts(),
+          initialData: null,
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -76,7 +82,8 @@ class AuthProject extends StatelessWidget {
               )),
               elevation: MaterialStateProperty.all(0),
             ))),
-        home: const AuthenticationWrapper(),
+        initialRoute: '/authenticationWrapper',
+        onGenerateRoute: RouteGenerator.generateRoutes,
       ),
     );
   }
@@ -88,13 +95,7 @@ class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User?>();
-    final firestoreService = FirestoreService();
     if (firebaseUser != null) {
-
-      StreamProvider<List<ProductModel>?>.value(
-        value: firestoreService.getProducts(firebaseUser),
-        initialData: null,
-      );
       return const Home();
     }
     return const Welcome();

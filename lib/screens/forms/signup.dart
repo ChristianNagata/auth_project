@@ -1,4 +1,3 @@
-import 'package:auth_project/screens/forms/store_informations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../firebase_services/authentication_service.dart';
@@ -19,7 +18,6 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign-up'),
@@ -97,14 +95,10 @@ class _SignUpState extends State<SignUp> {
                                 password2: password2Controller.text.trim(),
                               );
 
-                      if (response == 'Successful') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => StoreInformations(),
-                          ),
-                        );
-                      }
+                      (response == 'Successful')
+                          ? Navigator.of(context)
+                              .pushNamed('/storeRegistration')
+                          : null;
                     },
                     child: const Text('Próximo'),
                     style: Theme.of(context).elevatedButtonTheme.style),

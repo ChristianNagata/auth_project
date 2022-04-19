@@ -1,6 +1,8 @@
-import 'package:auth_project/providers/product_provider.dart';
+import 'package:auth_project/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../repositories/product.dart';
 
 class ProductForm extends StatelessWidget {
   var nome = '';
@@ -11,7 +13,7 @@ class ProductForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var productProvider = Provider.of<ProductProvider>(context);
+    final ProductRepository productRepository = Provider.of<ProductRepository>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -85,14 +87,6 @@ class ProductForm extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                   onPressed: () {
-                    productProvider.changeAll(
-                      nome,
-                      preco,
-                      estoque,
-                      cor,
-                      descricao,
-                    );
-                    productProvider.saveData();
                     Navigator.pop(context);
                   },
                   child: const Text('Salvar'),
