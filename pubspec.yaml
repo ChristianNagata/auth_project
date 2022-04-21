@@ -30,8 +30,10 @@ dependencies:
   flutter:
     sdk: flutter
   passwordfield: ^0.1.0
+  get_it:
+  dartz:
 
-  # Firebas
+  # Firebase
   firebase_core:
   firebase_auth:
 

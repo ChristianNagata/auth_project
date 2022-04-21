@@ -7,10 +7,10 @@ class GetAllProductsFirestoreDataSourceImp implements GetAllProductsDataSource {
   final FirebaseFirestore firebaseFirestore;
   final FirebaseAuth firebaseAuth;
 
-  GetAllProductsFirestoreDataSourceImp({
-    required this.firebaseFirestore,
-    required this.firebaseAuth,
-  });
+  GetAllProductsFirestoreDataSourceImp(
+    this.firebaseFirestore,
+    this.firebaseAuth,
+  );
 
   @override
   Stream<List<ProductDto>> call() {
@@ -20,8 +20,8 @@ class GetAllProductsFirestoreDataSourceImp implements GetAllProductsDataSource {
         .collection('produtos')
         .snapshots()
         .map((snapshot) => snapshot.docs
-        .map((document) => ProductDto.fromMap(document.data()))
-        .toList());
+            .map((document) => ProductDto.fromMap(document.data()))
+            .toList());
     return products;
   }
 }

@@ -1,6 +1,11 @@
+import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class Products extends StatelessWidget {
+
+  ProductController controller = GetIt.I.get<ProductController>();
+
   Widget _buildListItem(BuildContext context, document) {
     return ListTile(
       title: Row(
@@ -31,7 +36,7 @@ class Products extends StatelessWidget {
         elevation: 0,
         toolbarHeight: 80,
       ),
-      body: const Text('Show a list of products ...'),
+      body: Text(controller.product.nome),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed('/productForm');
