@@ -1,0 +1,7 @@
+The lowest layer of 'Clean Architecture'
+
+We don't know the existence of highest layers (don't have any imports of other layers)
+
+Most of information in here are immutable, but extendable
+
+As an example, the 'repositories' layer where only have interface classes for the 'repositories' from 'data' implements

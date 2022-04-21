@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../main.dart';
 
 class StoreRegistration extends StatefulWidget {
   StoreRegistration({Key? key}) : super(key: key);
@@ -83,27 +82,7 @@ class _SignUpState extends State<StoreRegistration> {
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
-                    onPressed: () async {
-                      lojas
-                          .doc(user!.uid)
-                          .set({
-                            'nome': storeNameController.text.trim(),
-                            'cnpj': storeCNPJController.text.trim(),
-                            'local': storeLocalController.text.trim(),
-                            'categoria': storeCategoryController.text.trim(),
-                            'uid': user.uid,
-                          })
-                          .then((value) => print('Store added'))
-                          .catchError(
-                              (error) => print('Failed to add store: $error'));
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const AuthenticationWrapper()),
-                      );
-                    },
+                    onPressed: () async {},
                     child: const Text('Cadastrar'),
                     style: Theme.of(context).elevatedButtonTheme.style),
               )

@@ -1,9 +1,6 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../firebase_services/authentication_service.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -39,9 +36,7 @@ class Home extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 48),
                 child: ElevatedButton(
-                  onPressed: () {
-                    context.read<AuthenticationService>().signOut();
-                  },
+                  onPressed: () {},
                   child: const Text('Sign out'),
                   style: Theme.of(context).elevatedButtonTheme.style,
                 ),

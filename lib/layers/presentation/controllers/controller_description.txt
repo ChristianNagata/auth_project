@@ -1,0 +1,1 @@
+Responsible for get all 'usecases' in one file for us to use it like a method

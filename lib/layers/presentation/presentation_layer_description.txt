@@ -1,0 +1,3 @@
+The higher layer of 'Clean Architecture'
+
+The layer where the data are actually used and showed on the screens

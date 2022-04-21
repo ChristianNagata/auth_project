@@ -1,0 +1,7 @@
+The layer in the middle of 'Clean Architecture'
+
+Here is where we have:
+    the 'repositories' that implements the interface classes from 'domain/repositories';
+    the 'dtos' that extends form 'domain/entities';
+    and the 'datasources'.
+

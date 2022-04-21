@@ -1,0 +1,30 @@
+The 'Clean Architecture'
+
+Based fundamentally on SOLID principles, at most on D (Dependency Inversion Principle)
+
+====================================================================================================
+From higher to lower layers:
+        Layers              Mutability          Depends on
+    1 - presentation        mutable             data
+    2 - data                less mutable        domain
+    3 - domain              immutable           no dependencies
+
+====================================================================================================
+Basic structure:
+    1 - presentation        2 - data                    3 - domain
+        - controllers           - datasources               - entities
+            - [...]                 - firebase                  - [...]
+        - ui                        - local                 - repositories
+            - screens               - remote                    - [...]
+                                    - [...]                 - usecases
+                                - repositories                  - [...]
+                                    - [...]
+                                - dtos
+                                    - [...]
+====================================================================================================
+Call order:
+    1 - Controller
+    2 - UseCase             (Imp)
+    3 - Repository          (Imp)
+    4 - DataSource          (Imp)
+====================================================================================================

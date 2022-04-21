@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../firebase_services/authentication_service.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -87,19 +85,7 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
-                    onPressed: () async {
-                      String? response =
-                          await context.read<AuthenticationService>().signUp(
-                                email: emailController.text.trim(),
-                                password1: password1Controller.text.trim(),
-                                password2: password2Controller.text.trim(),
-                              );
-
-                      (response == 'Successful')
-                          ? Navigator.of(context)
-                              .pushNamed('/storeRegistration')
-                          : null;
-                    },
+                    onPressed: () async {},
                     child: const Text('Próximo'),
                     style: Theme.of(context).elevatedButtonTheme.style),
               )

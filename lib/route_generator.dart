@@ -1,15 +1,16 @@
 import 'package:auth_project/main.dart';
-import 'package:auth_project/screens/forms/edit_product.dart';
-import 'package:auth_project/screens/forms/product.dart';
-import 'package:auth_project/screens/forms/signin.dart';
-import 'package:auth_project/screens/forms/signup.dart';
-import 'package:auth_project/screens/forms/store_registration.dart';
-import 'package:auth_project/screens/home.dart';
-import 'package:auth_project/screens/products.dart';
-import 'package:auth_project/screens/profile.dart';
-import 'package:auth_project/screens/welcome.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'layers/presentation/ui/screens/forms/edit_product.dart';
+import 'layers/presentation/ui/screens/forms/product.dart';
+import 'layers/presentation/ui/screens/forms/signin.dart';
+import 'layers/presentation/ui/screens/forms/signup.dart';
+import 'layers/presentation/ui/screens/forms/store_registration.dart';
+import 'layers/presentation/ui/screens/home.dart';
+import 'layers/presentation/ui/screens/products.dart';
+import 'layers/presentation/ui/screens/profile.dart';
+import 'layers/presentation/ui/screens/welcome.dart';
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {

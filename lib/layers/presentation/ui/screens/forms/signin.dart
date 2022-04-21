@@ -1,6 +1,4 @@
-import 'package:auth_project/firebase_services/authentication_service.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   SignIn({Key? key}) : super(key: key);
@@ -67,17 +65,7 @@ class _SignInState extends State<SignIn> {
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
-                  onPressed: () async {
-                    String? response =
-                        await context.read<AuthenticationService>().signIn(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
-                    (response == 'Successful')
-                        ? Navigator.of(context)
-                            .pushNamed('/authenticationWrapper')
-                        : null;
-                  },
+                  onPressed: () async {},
                   child: const Text('Entrar'),
                   style: Theme.of(context).elevatedButtonTheme.style,
                 ),

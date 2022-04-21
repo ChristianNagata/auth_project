@@ -1,0 +1,3 @@
+Here is where we extends from 'domain/entities'
+
+and implements "helpers" (toMap, fromMap, toJson, fromJson ...) that will be used in 'datasources'
