@@ -1,12 +1,10 @@
 import 'package:auth_project/core/inject/inject.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/route_generator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
-import 'package:provider/provider.dart';
 import 'layers/presentation/ui/screens/home.dart';
 import 'layers/presentation/ui/screens/welcome.dart';
 

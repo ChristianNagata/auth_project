@@ -22,15 +22,15 @@ class RouteGenerator {
       case '/':
         return MaterialPageRoute(builder: (_) => const Welcome());
       case '/signIn':
-        return MaterialPageRoute(builder: (_) => SignIn());
+        return MaterialPageRoute(builder: (_) => const SignIn());
       case '/signUp':
-        return MaterialPageRoute(builder: (_) => SignUp());
+        return MaterialPageRoute(builder: (_) => const SignUp());
       case '/storeRegistration':
-        return MaterialPageRoute(builder: (_) => StoreRegistration());
+        return MaterialPageRoute(builder: (_) => const StoreRegistration());
       case '/home':
         return MaterialPageRoute(builder: (_) => Home());
       case '/profile':
-        return MaterialPageRoute(builder: (_) => Profile());
+        return MaterialPageRoute(builder: (_) => const Profile());
       case '/products':
         return MaterialPageRoute(builder: (_) => Products());
       case '/productForm':

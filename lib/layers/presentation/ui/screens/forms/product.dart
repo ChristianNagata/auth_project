@@ -8,6 +8,8 @@ class ProductForm extends StatelessWidget {
   var descricao = '';
   var estoque = 1;
 
+  ProductForm({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
 

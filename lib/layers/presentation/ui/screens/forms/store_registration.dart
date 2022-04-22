@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class StoreRegistration extends StatefulWidget {
-  StoreRegistration({Key? key}) : super(key: key);
+  const StoreRegistration({Key? key}) : super(key: key);
 
   @override
   State<StoreRegistration> createState() => _SignUpState();
@@ -17,8 +15,6 @@ class _SignUpState extends State<StoreRegistration> {
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference lojas = FirebaseFirestore.instance.collection('lojas');
-    var user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       appBar: AppBar(

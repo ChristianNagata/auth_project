@@ -6,6 +6,8 @@ class Products extends StatelessWidget {
 
   ProductController productController = GetIt.I.get<ProductController>();
 
+  Products({Key? key}) : super(key: key);
+
   Widget _buildListItem(BuildContext context, document) {
     return ListTile(
       title: Row(
