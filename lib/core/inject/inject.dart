@@ -1,10 +1,10 @@
-import 'package:auth_project/layers/data/datasources/firebase/get_all_products_firestore_datasource_imp.dart';
+import 'package:auth_project/layers/data/datasources/firebase/products_datasource_firestore_imp.dart';
 import 'package:auth_project/layers/data/datasources/firebase/auth_datasource_firebaseauth_imp.dart';
-import 'package:auth_project/layers/data/datasources/get_all_products_datasource.dart';
+import 'package:auth_project/layers/data/datasources/products_datasource.dart';
 import 'package:auth_project/layers/data/datasources/auth_datasource.dart';
-import 'package:auth_project/layers/data/repositories/get_all_products_repository_imp.dart';
+import 'package:auth_project/layers/data/repositories/products_repository_imp.dart';
 import 'package:auth_project/layers/data/repositories/auth_repository_imp.dart';
-import 'package:auth_project/layers/domain/repositories/get_all_products_repository.dart';
+import 'package:auth_project/layers/domain/repositories/products_repository.dart';
 import 'package:auth_project/layers/domain/repositories/auth_repository.dart';
 import 'package:auth_project/layers/domain/usecases/get_all_products_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/get_all_products_usecase_imp.dart';
@@ -26,12 +26,12 @@ class Inject {
         () => FirebaseFirestore.instance);
     // datasources
     getIt.registerLazySingleton<AuthDataSource>(() => AuthDataSourceFirebaseAuthImp(getIt()));
-    getIt.registerLazySingleton<GetAllProductsDataSource>(
-        () => GetAllProductsFirestoreDataSourceImp(getIt(), getIt()));
+    getIt.registerLazySingleton<ProductsDataSource>(
+        () => ProductsDataSourceFirestoreImp(getIt(), getIt()));
     // repositories
     getIt.registerLazySingleton<AuthRepository>(() => AuthRepositoryImp(getIt()));
-    getIt.registerLazySingleton<GetAllProductsRepository>(
-        () => GetAllProductsRepositoryImp(getIt()));
+    getIt.registerLazySingleton<ProductsRepository>(
+        () => ProductsRepositoryImp(getIt()));
     // usecases
     getIt.registerLazySingleton<GetCurrentUserUseCase>(() => GetCurrentUserUseCaseImp(getIt()));
     getIt.registerLazySingleton<GetAllProductsUseCase>(

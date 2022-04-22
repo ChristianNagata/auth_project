@@ -11,6 +11,6 @@ class ProductController {
   late ProductEntity product;
 
   getAllProducts() {
-    return _getAllProductsUseCase.call();
+    return _getAllProductsUseCase.getAllProducts();
   }
 }
