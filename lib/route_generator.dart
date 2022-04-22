@@ -18,7 +18,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/authenticationWrapper':
-        return MaterialPageRoute(builder: (_) => const AuthenticationWrapper());
+        return MaterialPageRoute(builder: (_) => AuthenticationWrapper());
       case '/':
         return MaterialPageRoute(builder: (_) => const Welcome());
       case '/signIn':
@@ -28,7 +28,7 @@ class RouteGenerator {
       case '/storeRegistration':
         return MaterialPageRoute(builder: (_) => StoreRegistration());
       case '/home':
-        return MaterialPageRoute(builder: (_) => const Home());
+        return MaterialPageRoute(builder: (_) => Home());
       case '/profile':
         return MaterialPageRoute(builder: (_) => Profile());
       case '/products':

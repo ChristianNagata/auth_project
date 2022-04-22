@@ -1,4 +1,6 @@
+import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class SignIn extends StatefulWidget {
   SignIn({Key? key}) : super(key: key);
@@ -8,8 +10,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  AuthController authController = GetIt.I.get<AuthController>();
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
 
   bool _isObscure = true;
@@ -65,7 +67,16 @@ class _SignInState extends State<SignIn> {
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    String? response = await authController.signIn(
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim(),
+                    );
+                    (response == 'Successful')
+                        ? Navigator.of(context)
+                            .pushNamed('/authenticationWrapper')
+                        : null;
+                  },
                   child: const Text('Entrar'),
                   style: Theme.of(context).elevatedButtonTheme.style,
                 ),

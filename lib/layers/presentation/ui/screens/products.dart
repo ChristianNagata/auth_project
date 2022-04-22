@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 
 class Products extends StatelessWidget {
 
-  ProductController controller = GetIt.I.get<ProductController>();
+  ProductController productController = GetIt.I.get<ProductController>();
 
   Widget _buildListItem(BuildContext context, document) {
     return ListTile(
@@ -36,7 +36,7 @@ class Products extends StatelessWidget {
         elevation: 0,
         toolbarHeight: 80,
       ),
-      body: Text(controller.product.nome),
+      body: Text(productController.product.nome),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed('/productForm');

@@ -1,9 +1,11 @@
 import 'package:auth_project/core/inject/inject.dart';
+import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/route_generator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'layers/presentation/ui/screens/home.dart';
 import 'layers/presentation/ui/screens/welcome.dart';
@@ -59,13 +61,14 @@ class AuthProject extends StatelessWidget {
 }
 
 class AuthenticationWrapper extends StatelessWidget {
-  const AuthenticationWrapper({Key? key}) : super(key: key);
+  AuthenticationWrapper({Key? key}) : super(key: key);
+  AuthController authController = GetIt.I.get<AuthController>();
 
   @override
   Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User?>();
+    final firebaseUser = authController.getCurrentUser();
     if (firebaseUser != null) {
-      return const Home();
+      return Home();
     }
     return const Welcome();
   }

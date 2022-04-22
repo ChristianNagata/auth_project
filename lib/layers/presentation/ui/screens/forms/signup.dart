@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+
+import '../../../controllers/auth_controller.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -8,6 +11,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  AuthController authController = GetIt.I.get<AuthController>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController password1Controller = TextEditingController();
   final TextEditingController password2Controller = TextEditingController();
@@ -85,7 +89,17 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      String? response = await authController.signUp(
+                        email: emailController.text.trim(),
+                        password1: password1Controller.text.trim(),
+                        password2: password2Controller.text.trim(),
+                      );
+                      (response == 'Successful')
+                          ? Navigator.of(context)
+                              .pushNamed('/storeRegistration')
+                          : null;
+                    },
                     child: const Text('Próximo'),
                     style: Theme.of(context).elevatedButtonTheme.style),
               )

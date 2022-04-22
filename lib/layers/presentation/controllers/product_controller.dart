@@ -1,7 +1,7 @@
 
 
 import 'package:auth_project/layers/domain/entities/product_entity.dart';
-import 'package:auth_project/layers/domain/usecases/get_all_products_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/product_usecases/get_all_products_usecase.dart';
 
 class ProductController {
   final GetAllProductsUseCase _getAllProductsUseCase;

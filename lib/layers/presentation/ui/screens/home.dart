@@ -1,15 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+
+import '../../controllers/auth_controller.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
+  Home({Key? key}) : super(key: key);
+  AuthController authController = GetIt.I.get<AuthController>();
   @override
   Widget build(BuildContext context) {
-    var user = FirebaseAuth.instance.currentUser;
-    String? userEmail = user?.email;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -22,7 +21,6 @@ class Home extends StatelessWidget {
           child: Center(
               child: Column(
             children: [
-              Text(userEmail!),
               Padding(
                 padding: const EdgeInsets.only(top: 48),
                 child: ElevatedButton(
@@ -36,7 +34,10 @@ class Home extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 48),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await authController.signOut();
+                    Navigator.of(context).pushNamed('/authenticationWrapper');
+                  },
                   child: const Text('Sign out'),
                   style: Theme.of(context).elevatedButtonTheme.style,
                 ),
