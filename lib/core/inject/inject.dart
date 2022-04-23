@@ -14,10 +14,16 @@ import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_out_useca
 import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_out_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_up_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_up_usecase_imp.dart';
+import 'package:auth_project/layers/domain/usecases/product_usecases/delete_item_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/product_usecases/delete_item_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/get_all_products_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/get_all_products_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/auth_usecases/get_current_user_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/auth_usecases/get_current_user_usecase_imp.dart';
+import 'package:auth_project/layers/domain/usecases/product_usecases/save_product%20_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/product_usecases/save_product_usecase_imp.dart';
+import 'package:auth_project/layers/domain/usecases/product_usecases/update_product_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/product_usecases/update_product_usecase_imp.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -45,19 +51,21 @@ class Inject {
         () => ProductsRepositoryImp(getIt()));
 
     // USECASES
-    // auth_usecases
+      // auth_usecases
     getIt.registerLazySingleton<GetCurrentUserUseCase>(() => GetCurrentUserUseCaseImp(getIt()));
     getIt.registerLazySingleton<GetAuthStateChangesUseCase>(() => GetAuthStateChangesUseCaseImp(getIt()));
     getIt.registerLazySingleton<SignInUseCase>(() => SignInUseCaseImp(getIt()));
     getIt.registerLazySingleton<SignOutUseCase>(() => SignOutUseCaseImp(getIt()));
     getIt.registerLazySingleton<SignUpUseCase>(() => SignUpUseCaseImp(getIt()));
-    // product_usecases
-    getIt.registerLazySingleton<GetAllProductsUseCase>(
-        () => GetAllProductsUseCaseImp(getIt()));
+      // product_usecases
+    getIt.registerLazySingleton<GetAllProductsUseCase>(() => GetAllProductsUseCaseImp(getIt()));
+    getIt.registerLazySingleton<DeleteItemUseCase>(() => DeleteItemUseCaseImp(getIt()));
+    getIt.registerLazySingleton<SaveProductUseCase>(() => SaveProductUseCaseImp(getIt()));
+    getIt.registerLazySingleton<UpdateProductUseCase>(() => UpdateProductUseCaseImp(getIt()));
 
     // CONTROLLERS
     getIt.registerLazySingleton<AuthController>(() => AuthController(getIt(), getIt(), getIt(), getIt(), getIt()));
-    getIt.registerFactory<ProductController>(() => ProductController(getIt()));
+    getIt.registerFactory<ProductController>(() => ProductController(getIt(), getIt(), getIt(), getIt()));
 
   }
 }

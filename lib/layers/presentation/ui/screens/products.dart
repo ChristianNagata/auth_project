@@ -2,6 +2,8 @@ import 'package:auth_project/layers/presentation/controllers/product_controller.
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../domain/entities/product_entity.dart';
+
 class Products extends StatelessWidget {
 
   ProductController productController = GetIt.I.get<ProductController>();
@@ -38,7 +40,7 @@ class Products extends StatelessWidget {
         elevation: 0,
         toolbarHeight: 80,
       ),
-      body: Text(productController.product.nome),
+      body: const Text('Produtos aqui'),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed('/productForm');
