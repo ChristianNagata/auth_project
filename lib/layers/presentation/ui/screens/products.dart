@@ -1,12 +1,14 @@
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 
 import '../../../domain/entities/product_entity.dart';
+import '../../../domain/usecases/product_usecases/get_all_products_usecase.dart';
 
 class Products extends StatelessWidget {
 
-  ProductController productController = GetIt.I.get<ProductController>();
+
 
   Products({Key? key}) : super(key: key);
 
@@ -34,13 +36,23 @@ class Products extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    List<ProductEntity> myProducts = Provider.of<List<ProductEntity>>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Products'),
         elevation: 0,
         toolbarHeight: 80,
       ),
-      body: const Text('Produtos aqui'),
+      body: myProducts.isEmpty
+          ? const Text('Loading...')
+          : ListView.builder(
+        itemExtent: 80,
+        itemCount: myProducts.length,
+        itemBuilder: (context, index) =>
+            _buildListItem(context, myProducts[index]),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed('/productForm');
