@@ -1,4 +1,5 @@
 import 'package:auth_project/layers/domain/entities/product_entity.dart';
+import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:auth_project/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,11 +20,11 @@ class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     final args = settings.arguments;
 
+    final currentUser = GetIt.I.get<AuthController>().getCurrentUser();
+
     switch (settings.name) {
-      case '/authenticationWrapper':
-        return MaterialPageRoute(builder: (_) => AuthenticationWrapper());
       case '/':
-        return MaterialPageRoute(builder: (_) => const Welcome());
+        return MaterialPageRoute(builder: (_) => (currentUser == null) ? const Welcome() : Home());
       case '/signIn':
         return MaterialPageRoute(builder: (_) => const SignIn());
       case '/signUp':
@@ -31,7 +32,8 @@ class RouteGenerator {
       case '/storeRegistration':
         return MaterialPageRoute(builder: (_) => const StoreRegistration());
       case '/home':
-        return MaterialPageRoute(builder: (_) => Home());
+        return MaterialPageRoute(
+            builder: (_) => (currentUser != null) ? Home() : const Welcome());
       case '/profile':
         return MaterialPageRoute(builder: (_) => const Profile());
       case '/products':

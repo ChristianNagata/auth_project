@@ -1,6 +1,6 @@
 import 'package:auth_project/core/inject/inject.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
-import 'package:auth_project/route_generator.dart'; 
+import 'package:auth_project/route_generator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,8 +10,11 @@ import 'layers/presentation/ui/screens/welcome.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
+
   Inject.init();
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -52,22 +55,8 @@ class AuthProject extends StatelessWidget {
             )),
             elevation: MaterialStateProperty.all(0),
           ))),
-      initialRoute: '/authenticationWrapper',
+      initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoutes,
     );
-  }
-}
-
-class AuthenticationWrapper extends StatelessWidget {
-  AuthenticationWrapper({Key? key}) : super(key: key);
-  AuthController authController = GetIt.I.get<AuthController>();
-
-  @override
-  Widget build(BuildContext context) {
-    final firebaseUser = authController.getCurrentUser();
-    if (firebaseUser != null) {
-      return Home();
-    }
-    return const Welcome();
   }
 }

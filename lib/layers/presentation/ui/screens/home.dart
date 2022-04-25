@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () async {
                     await authController.signOut();
-                    Navigator.of(context).pushNamed('/authenticationWrapper');
+                    Navigator.of(context).pushNamed('/');
                   },
                   child: const Text('Sign out'),
                   style: Theme.of(context).elevatedButtonTheme.style,

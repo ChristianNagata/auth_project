@@ -20,7 +20,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Sign In'),
         elevation: 0,
         toolbarHeight: 80,
       ),
@@ -74,7 +74,7 @@ class _SignInState extends State<SignIn> {
                     );
                     (response == 'Successful')
                         ? Navigator.of(context)
-                            .pushNamed('/authenticationWrapper')
+                            .pushNamed('/')
                         : null;
                   },
                   child: const Text('Entrar'),
