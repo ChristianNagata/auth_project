@@ -1,17 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var user = FirebaseAuth.instance.currentUser;
-    final Stream<DocumentSnapshot> _store = FirebaseFirestore.instance
-        .collection('lojas')
-        .doc(user!.uid)
-        .snapshots();
+
+    DocumentSnapshot<Map<String, dynamic>> storeProvider =
+        Provider.of<DocumentSnapshot<Map<String, dynamic>>>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -19,27 +17,12 @@ class Profile extends StatelessWidget {
         elevation: 0,
         toolbarHeight: 80,
       ),
-      body: StreamBuilder<DocumentSnapshot>(
-        stream: _store,
-        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return const Text('Something went wrong');
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("Loading");
-          }
-
-          return ListView(
-            children: [
-              ListTile(title: Text(snapshot.data!['nome'])),
-              ListTile(title: Text(snapshot.data!['cnpj'])),
-              ListTile(title: Text(snapshot.data!['categoria'])),
-              ListTile(title: Text(snapshot.data!['local'])),
-            ]
-          );
-        },
-      ),
+      body: ListView(children: [
+        ListTile(title: Text(storeProvider.data()!['nome'])),
+        ListTile(title: Text(storeProvider.data()!['cnpj'])),
+        ListTile(title: Text(storeProvider.data()!['categoria'])),
+        ListTile(title: Text(storeProvider.data()!['local'])),
+      ]),
     );
   }
 }

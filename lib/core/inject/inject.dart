@@ -28,8 +28,10 @@ import 'package:auth_project/layers/domain/usecases/product_usecases/save_produc
 import 'package:auth_project/layers/domain/usecases/product_usecases/save_product_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/update_product_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/update_product_usecase_imp.dart';
+import 'package:auth_project/layers/domain/usecases/store_usecases/get_store_information_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/store_usecases/get_store_information_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/store_usecases/register_store_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/store_usecases/store_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/store_usecases/register_store_usecase.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
@@ -68,7 +70,8 @@ class Inject {
     getIt.registerLazySingleton<SignUpUseCase>(() => SignUpUseCaseImp(getIt()));
 
       // store_usecases
-    getIt.registerLazySingleton<StoreUseCase>(() => RegisterStoreUseCaseImp(getIt()));
+    getIt.registerLazySingleton<RegisterStoreUseCase>(() => RegisterStoreUseCaseImp(getIt()));
+    getIt.registerLazySingleton<GetStoreInformationUseCase>(() => GetStoreInformationUseCaseImp(getIt()));
 
       // product_usecases
     getIt.registerLazySingleton<GetAllProductsUseCase>(() => GetAllProductsUseCaseImp(getIt()));
@@ -78,7 +81,7 @@ class Inject {
 
     // CONTROLLERS
     getIt.registerLazySingleton<AuthController>(() => AuthController(getIt(), getIt(), getIt(), getIt(), getIt()));
-    getIt.registerLazySingleton<StoreController>(() => StoreController(getIt()));
+    getIt.registerLazySingleton<StoreController>(() => StoreController(getIt(), getIt()));
     getIt.registerFactory<ProductController>(() => ProductController(getIt(), getIt(), getIt(), getIt()));
 
   }

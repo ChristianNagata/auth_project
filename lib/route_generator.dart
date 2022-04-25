@@ -1,6 +1,7 @@
 import 'package:auth_project/layers/domain/entities/product_entity.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
+import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -35,13 +36,18 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => (currentUser != null) ? Home() : const Welcome());
       case '/profile':
-        return MaterialPageRoute(builder: (_) => const Profile());
+        return MaterialPageRoute(builder: (_) =>
+            StreamProvider.value(
+              value: GetIt.I.get<StoreController>().getStoreInformation(),
+              initialData: const <DocumentSnapshot>{},
+              child: const Profile(),));
       case '/products':
         return MaterialPageRoute(
-            builder: (_) => StreamProvider.value(
-                value: GetIt.I.get<ProductController>().getAllProducts(),
-                initialData: const <ProductEntity>[],
-                child: Products()));
+            builder: (_) =>
+                StreamProvider.value(
+                    value: GetIt.I.get<ProductController>().getAllProducts(),
+                    initialData: const <ProductEntity>[],
+                    child: Products()));
       case '/productForm':
         return MaterialPageRoute(builder: (_) => ProductForm());
       case '/editProductForm':

@@ -16,4 +16,12 @@ class StoreDataSourceFirestoreImp implements StoreDataSource {
         .doc(_firebaseAuth.currentUser!.uid)
         .set(store.toMap());
   }
+
+  @override
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getStoreInformation() {
+    return _firebaseFirestore
+        .collection('lojas')
+        .doc(_firebaseAuth.currentUser!.uid)
+        .snapshots();
+  }
 }
