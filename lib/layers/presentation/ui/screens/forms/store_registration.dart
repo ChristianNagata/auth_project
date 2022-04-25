@@ -1,4 +1,8 @@
+import 'package:auth_project/layers/data/dtos/store_dto.dart';
+import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
+import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class StoreRegistration extends StatefulWidget {
   const StoreRegistration({Key? key}) : super(key: key);
@@ -8,6 +12,9 @@ class StoreRegistration extends StatefulWidget {
 }
 
 class _SignUpState extends State<StoreRegistration> {
+  final StoreController storeController = GetIt.I.get<StoreController>();
+  final AuthController authController = GetIt.I.get<AuthController>();
+
   final TextEditingController storeNameController = TextEditingController();
   final TextEditingController storeCNPJController = TextEditingController();
   final TextEditingController storeCategoryController = TextEditingController();
@@ -15,7 +22,6 @@ class _SignUpState extends State<StoreRegistration> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign-up'),
@@ -78,7 +84,17 @@ class _SignUpState extends State<StoreRegistration> {
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      StoreDto store = StoreDto(
+                        uid: authController.getCurrentUser()!.uid,
+                        nome: storeNameController.text.trim(),
+                        categoria: storeCategoryController.text.trim(),
+                        cnpj: storeCNPJController.text.trim(),
+                        local: storeLocalController.text.trim(),
+                      );
+                      await storeController.registerStore(store);
+                      Navigator.of(context).pushNamed('/home');
+                    },
                     child: const Text('Cadastrar'),
                     style: Theme.of(context).elevatedButtonTheme.style),
               )
