@@ -1,7 +1,6 @@
 import 'package:auth_project/layers/domain/entities/product_entity.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
-import 'package:auth_project/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -24,7 +23,8 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => (currentUser == null) ? const Welcome() : Home());
+        return MaterialPageRoute(
+            builder: (_) => (currentUser == null) ? const Welcome() : Home());
       case '/signIn':
         return MaterialPageRoute(builder: (_) => const SignIn());
       case '/signUp':

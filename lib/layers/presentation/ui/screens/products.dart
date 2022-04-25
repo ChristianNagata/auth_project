@@ -1,10 +1,6 @@
-import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
-
 import '../../../domain/entities/product_entity.dart';
-import '../../../domain/usecases/product_usecases/get_all_products_usecase.dart';
 
 class Products extends StatelessWidget {
 
