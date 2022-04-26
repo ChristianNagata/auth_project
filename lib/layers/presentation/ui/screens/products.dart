@@ -3,28 +3,25 @@ import 'package:provider/provider.dart';
 import '../../../domain/entities/product_entity.dart';
 
 class Products extends StatelessWidget {
+  const Products({Key? key}) : super(key: key);
 
-
-
-  Products({Key? key}) : super(key: key);
-
-  Widget _buildListItem(BuildContext context, document) {
+  Widget _buildListItem(BuildContext context, ProductEntity product) {
     return ListTile(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(document.nome),
+          Text(product.nome),
           const Icon(
             Icons.edit_outlined,
             size: 16,
           ),
         ],
       ),
-      subtitle: Text("\$${document.preco}"),
+      subtitle: Text("R\$ ${product.preco}"),
       onTap: () {
         Navigator.of(context).pushNamed(
           '/editProductForm',
-          arguments: document,
+          arguments: product,
         );
       },
     );
@@ -32,7 +29,6 @@ class Products extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     List<ProductEntity> myProducts = Provider.of<List<ProductEntity>>(context);
 
     return Scaffold(
@@ -42,13 +38,13 @@ class Products extends StatelessWidget {
         toolbarHeight: 80,
       ),
       body: myProducts.isEmpty
-          ? const Text('Loading...')
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
-        itemExtent: 80,
-        itemCount: myProducts.length,
-        itemBuilder: (context, index) =>
-            _buildListItem(context, myProducts[index]),
-      ),
+              itemExtent: 80,
+              itemCount: myProducts.length,
+              itemBuilder: (context, index) =>
+                  _buildListItem(context, myProducts[index]),
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed('/productForm');

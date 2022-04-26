@@ -1,6 +1,6 @@
 
-import '../../../data/dtos/product_dto.dart';
+import 'package:auth_project/layers/domain/entities/product_entity.dart';
 
 abstract class UpdateProductUseCase {
-  Future<void> updateProduct(ProductDto product);
+  Future<void> updateProduct(ProductEntity product);
 }

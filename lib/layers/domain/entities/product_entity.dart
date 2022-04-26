@@ -1,4 +1,3 @@
-
 class ProductEntity {
   String id;
   String nome;
@@ -15,4 +14,5 @@ class ProductEntity {
     required this.cor,
     required this.descricao,
   });
+
 }

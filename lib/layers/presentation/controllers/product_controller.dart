@@ -1,4 +1,3 @@
-import 'package:auth_project/layers/data/dtos/product_dto.dart';
 import 'package:auth_project/layers/domain/entities/product_entity.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/delete_item_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/get_all_products_usecase.dart';
@@ -24,11 +23,11 @@ class ProductController {
     return await _deleteItemUseCase.deleteItem(productId);
   }
 
-  Future<void> saveProduct(ProductDto product) async {
+  Future<void> saveProduct(ProductEntity product) async {
     return await _saveProductUseCase.saveProduct(product);
   }
 
-  Future<void> updateProduct(ProductDto product) async {
+  Future<void> updateProduct(ProductEntity product) async {
     return await _updateProductUseCase.updateProduct(product);
   }
 

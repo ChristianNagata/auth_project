@@ -47,13 +47,13 @@ class RouteGenerator {
                 StreamProvider.value(
                     value: GetIt.I.get<ProductController>().getAllProducts(),
                     initialData: const <ProductEntity>[],
-                    child: Products()));
+                    child: const Products()));
       case '/productForm':
         return MaterialPageRoute(builder: (_) => ProductForm());
       case '/editProductForm':
-        if (args is DocumentSnapshot<Object?>) {
+        if (args is ProductEntity) {
           return MaterialPageRoute(
-              builder: (_) => EditProductForm(documentSnapshot: args));
+              builder: (_) => EditProductForm(productEntity: args));
         }
         return _errorRoute();
       default:

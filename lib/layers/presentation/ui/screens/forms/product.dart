@@ -1,5 +1,8 @@
+import 'package:auth_project/layers/domain/entities/product_entity.dart';
+import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get_it/get_it.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductForm extends StatelessWidget {
   var nome = '';
@@ -7,12 +10,13 @@ class ProductForm extends StatelessWidget {
   var cor = '';
   var descricao = '';
   var estoque = 1;
+  Uuid uuid = const Uuid();
 
   ProductForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
+    var productController = GetIt.I.get<ProductController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product form'),
@@ -84,7 +88,16 @@ class ProductForm extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    ProductEntity product = ProductEntity(
+                      id: uuid.v4(),
+                      nome: nome,
+                      preco: preco,
+                      estoque: estoque,
+                      cor: cor,
+                      descricao: descricao,
+                    );
+                    await productController.saveProduct(product);
                     Navigator.pop(context);
                   },
                   child: const Text('Salvar'),

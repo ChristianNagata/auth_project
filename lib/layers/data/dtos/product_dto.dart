@@ -16,6 +16,28 @@ class ProductDto extends ProductEntity {
             cor: cor,
             descricao: descricao);
 
+  ProductEntity toEntity() {
+    return ProductEntity(
+      id: id,
+      nome: nome,
+      preco: preco,
+      estoque: estoque,
+      cor: cor,
+      descricao: descricao,
+    );
+  }
+
+  factory ProductDto.fromEntity(ProductEntity entity) {
+    return ProductDto(
+      id: entity.id,
+      nome: entity.nome,
+      preco: entity.preco,
+      estoque: entity.estoque,
+      cor: entity.cor,
+      descricao: entity.descricao,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,

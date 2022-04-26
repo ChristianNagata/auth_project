@@ -1,20 +1,24 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:auth_project/layers/domain/entities/product_entity.dart';
+import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class EditProductForm extends StatelessWidget {
-  final DocumentSnapshot documentSnapshot;
+  final ProductEntity productEntity;
 
-  const EditProductForm({Key? key, required this.documentSnapshot})
+  const EditProductForm({Key? key, required this.productEntity})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String nome = documentSnapshot['nome'];
-    double preco = documentSnapshot['preco'];
-    String cor = documentSnapshot['cor'];
-    String descricao = documentSnapshot['descricao'];
-    int estoque = documentSnapshot['estoque'];
+    ProductController productController = GetIt.I.get<ProductController>();
 
+    String id = productEntity.id;
+    String nome = productEntity.nome;
+    double preco = productEntity.preco;
+    String cor = productEntity.cor;
+    String descricao = productEntity.descricao;
+    int estoque = productEntity.estoque;
 
     return Scaffold(
       appBar: AppBar(
@@ -98,7 +102,16 @@ class EditProductForm extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 24),
                       child: ElevatedButton(
                         child: const Text('Salvar'),
-                        onPressed: () {
+                        onPressed: () async {
+                          ProductEntity product = ProductEntity(
+                            id: id,
+                            nome: nome,
+                            preco: preco,
+                            estoque: estoque,
+                            cor: cor,
+                            descricao: descricao,
+                          );
+                          await productController.updateProduct(product);
                           Navigator.pop(context);
                         },
                       ),
@@ -108,7 +121,8 @@ class EditProductForm extends StatelessWidget {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Colors.red),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        await productController.deleteItem(id);
                         Navigator.pop(context);
                       },
                     ),

@@ -20,13 +20,15 @@ class ProductsRepositoryImp implements ProductsRepository {
   }
 
   @override
-  Future<void> saveProduct(ProductDto product) async {
-    return await _productsDataSource.saveProduct(product);
+  Future<void> saveProduct(ProductEntity product) async {
+    ProductDto productDto = ProductDto.fromEntity(product);
+    return await _productsDataSource.saveProduct(productDto);
   }
 
   @override
-  Future<void> updateProduct(ProductDto product) async {
-    return await _productsDataSource.updateProduct(product);
+  Future<void> updateProduct(ProductEntity product) async {
+    ProductDto productDto = ProductDto.fromEntity(product);
+    return await _productsDataSource.updateProduct(productDto);
   }
 
 }
