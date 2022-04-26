@@ -21,21 +21,22 @@ class AuthDataSourceFirebaseAuthImp implements AuthDataSource {
   }
 
   @override
-  Future<String?> signIn({
+  Future<bool> signIn({
     required String email,
     required String password,
   }) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      return 'Successful';
+      return true;
     } on FirebaseAuthException catch (e) {
-      return e.message;
+      print(e.message);
+      return false;
     }
   }
 
   @override
-  Future<String?> signUp({
+  Future<bool> signUp({
     required String email,
     required String password1,
     required String password2,
@@ -44,9 +45,10 @@ class AuthDataSourceFirebaseAuthImp implements AuthDataSource {
       if (password1 == password2) {
         await _firebaseAuth.createUserWithEmailAndPassword(
             email: email, password: password1);
-        return 'Successful';
+        return true;
       } else {
-        return 'The passwords must be equals';
+        print('The passwords must be equals');
+        return false;
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -57,6 +59,6 @@ class AuthDataSourceFirebaseAuthImp implements AuthDataSource {
     } catch (e) {
       print(e);
     }
-    return null;
+    return false;
   }
 }

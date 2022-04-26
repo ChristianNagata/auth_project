@@ -1,6 +1,6 @@
 
 abstract class SignInUseCase {
-  Future<String?> signIn({
+  Future<bool> signIn({
     required String email,
     required String password,
   });

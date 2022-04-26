@@ -1,7 +1,7 @@
 
 
 abstract class SignUpUseCase {
-  Future<String?> signUp({
+  Future<bool> signUp({
     required String email,
     required String password1,
     required String password2,

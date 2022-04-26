@@ -65,13 +65,13 @@ class RouteGenerator {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Home'),
+          title: const Text('! ERROR'),
           elevation: 0,
           toolbarHeight: 80,
         ),
         body: const Center(
           child: Text(
-            'ERROR',
+            '! ERROR',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 24,

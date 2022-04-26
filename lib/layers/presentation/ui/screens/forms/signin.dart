@@ -68,13 +68,11 @@ class _SignInState extends State<SignIn> {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                   onPressed: () async {
-                    String? response = await authController.signIn(
+                    await authController.signIn(
                       email: emailController.text.trim(),
                       password: passwordController.text.trim(),
-                    );
-                    (response == 'Successful')
-                        ? Navigator.of(context)
-                            .pushNamed('/')
+                    )
+                        ? Navigator.of(context).pushNamed('/')
                         : null;
                   },
                   child: const Text('Entrar'),

@@ -27,7 +27,7 @@ class AuthController {
     return _getCurrentUserUseCase.getCurrentUser();
   }
 
-  Future<String?> signIn({
+  Future<bool> signIn({
     required String email,
     required String password,
   }) async {
@@ -38,7 +38,7 @@ class AuthController {
     return await _signOutUseCase.signOut();
   }
 
-  Future<String?> signUp({
+  Future<bool> signUp({
     required String email,
     required String password1,
     required String password2,

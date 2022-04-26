@@ -16,7 +16,7 @@ class AuthRepositoryImp implements AuthRepository {
   Stream<User?> get authStateChanges => _authDataSource.authStateChanges;
 
   @override
-  Future<String?> signIn({
+  Future<bool> signIn({
     required String email,
     required String password,
   }) async {
@@ -29,7 +29,7 @@ class AuthRepositoryImp implements AuthRepository {
   }
 
   @override
-  Future<String?> signUp({
+  Future<bool> signUp({
     required String email,
     required String password1,
     required String password2,

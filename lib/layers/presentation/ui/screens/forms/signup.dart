@@ -90,12 +90,11 @@ class _SignUpState extends State<SignUp> {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                     onPressed: () async {
-                      String? response = await authController.signUp(
+                      await authController.signUp(
                         email: emailController.text.trim(),
                         password1: password1Controller.text.trim(),
                         password2: password2Controller.text.trim(),
-                      );
-                      (response == 'Successful')
+                      )
                           ? Navigator.of(context)
                               .pushNamed('/storeRegistration')
                           : null;

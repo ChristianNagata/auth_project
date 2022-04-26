@@ -8,7 +8,7 @@ class SignInUseCaseImp implements SignInUseCase {
   SignInUseCaseImp(this._authRepository);
 
   @override
-  Future<String?> signIn({required String email, required String password}) async {
+  Future<bool> signIn({required String email, required String password}) async {
     return await _authRepository.signIn(email: email, password: password);
   }
 }
