@@ -27,7 +27,6 @@ class Home extends StatelessWidget {
                     Navigator.of(context).pushNamed('/profile');
                   },
                   child: const Text('Profile'),
-                  style: Theme.of(context).elevatedButtonTheme.style,
                 ),
               ),
               Padding(
@@ -38,7 +37,6 @@ class Home extends StatelessWidget {
                     Navigator.of(context).pushNamed('/');
                   },
                   child: const Text('Sign out'),
-                  style: Theme.of(context).elevatedButtonTheme.style,
                 ),
               ),
 
@@ -49,7 +47,6 @@ class Home extends StatelessWidget {
                     Navigator.of(context).pushNamed('/products');
                   },
                   child: const Text('Products'),
-                  style: Theme.of(context).elevatedButtonTheme.style,
                 ),
               ),
 
@@ -60,7 +57,6 @@ class Home extends StatelessWidget {
                     Navigator.pushNamed(context, '/somethingElse');
                   },
                   child: const Text('Page not found'),
-                  style: Theme.of(context).elevatedButtonTheme.style,
                 ),
               ),
 
@@ -71,7 +67,7 @@ class Home extends StatelessWidget {
                     FirebaseCrashlytics.instance.crash();
                   },
                   child: const Text('Crash test'),
-                  style: Theme.of(context).elevatedButtonTheme.style,
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.orangeAccent)),
                 ),
               ),
             ],

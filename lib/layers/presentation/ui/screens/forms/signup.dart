@@ -90,21 +90,21 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
-                    onPressed: () async {
-                      AuthEntity authEntity = AuthEntity(
-                        email: emailController.text.trim(),
-                        password: password1Controller.text.trim(),
-                        password2: password2Controller.text.trim(),
-                      );
-                      if (authEntity.passwordsEquals()) {
-                        await authController.signUp(authEntity)
-                            ? Navigator.of(context)
-                                .pushNamed('/storeRegistration')
-                            : null;
-                      }
-                    },
-                    child: const Text('Próximo'),
-                    style: Theme.of(context).elevatedButtonTheme.style),
+                  onPressed: () async {
+                    AuthEntity authEntity = AuthEntity(
+                      email: emailController.text.trim(),
+                      password: password1Controller.text.trim(),
+                      password2: password2Controller.text.trim(),
+                    );
+                    if (authEntity.passwordsEquals()) {
+                      await authController.signUp(authEntity)
+                          ? Navigator.of(context)
+                              .pushNamed('/storeRegistration')
+                          : null;
+                    }
+                  },
+                  child: const Text('Próximo'),
+                ),
               )
             ],
           ),

@@ -78,7 +78,6 @@ class _SignInState extends State<SignIn> {
                         : null;
                   },
                   child: const Text('Entrar'),
-                  style: Theme.of(context).elevatedButtonTheme.style,
                 ),
               )
             ],
