@@ -15,6 +15,26 @@ class StoreDto extends StoreEntity {
           local: local,
         );
 
+  StoreEntity toEntity() {
+    return StoreEntity(
+      uid: uid,
+      nome: nome,
+      categoria: categoria,
+      cnpj: cnpj,
+      local: local,
+    );
+  }
+
+  factory StoreDto.fromEntity(StoreEntity storeEntity) {
+    return StoreDto(
+      uid: storeEntity.uid,
+      nome: storeEntity.nome,
+      categoria: storeEntity.categoria,
+      cnpj: storeEntity.cnpj,
+      local: storeEntity.local,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,

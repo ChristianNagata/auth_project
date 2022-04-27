@@ -1,6 +1,5 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:auth_project/layers/domain/entities/store_entity.dart';
 
 abstract class GetStoreInformationUseCase {
-  Stream<DocumentSnapshot<Map<String, dynamic>>> getStoreInformation();
+  Stream<StoreEntity> getStoreInformation();
 }

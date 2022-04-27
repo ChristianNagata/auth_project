@@ -1,7 +1,6 @@
-import 'package:auth_project/layers/data/dtos/store_dto.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:auth_project/layers/domain/entities/store_entity.dart';
 
 abstract class StoreRepository {
-  Future<void> registerStore(StoreDto store);
-  Stream<DocumentSnapshot<Map<String, dynamic>>> getStoreInformation();
+  Future<void> registerStore(StoreEntity storeEntity);
+  Stream<StoreEntity> getStoreInformation();
 }

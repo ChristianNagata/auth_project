@@ -1,4 +1,4 @@
-import 'package:auth_project/layers/data/dtos/store_dto.dart';
+import 'package:auth_project/layers/domain/entities/store_entity.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
 import 'package:flutter/material.dart';
@@ -85,14 +85,14 @@ class _SignUpState extends State<StoreRegistration> {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                     onPressed: () async {
-                      StoreDto store = StoreDto(
+                      StoreEntity storeEntity = StoreEntity(
                         uid: authController.getCurrentUser()!.uid,
                         nome: storeNameController.text.trim(),
                         categoria: storeCategoryController.text.trim(),
                         cnpj: storeCNPJController.text.trim(),
                         local: storeLocalController.text.trim(),
                       );
-                      await storeController.registerStore(store);
+                      await storeController.registerStore(storeEntity);
                       Navigator.of(context).pushNamed('/home');
                     },
                     child: const Text('Cadastrar'),

@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:auth_project/layers/domain/entities/store_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,9 +7,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    DocumentSnapshot<Map<String, dynamic>> storeProvider =
-        Provider.of<DocumentSnapshot<Map<String, dynamic>>>(context);
+    StoreEntity? storeProvider = Provider.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -17,12 +15,22 @@ class Profile extends StatelessWidget {
         elevation: 0,
         toolbarHeight: 80,
       ),
-      body: ListView(children: [
-        ListTile(title: Text(storeProvider.data()!['nome'])),
-        ListTile(title: Text(storeProvider.data()!['cnpj'])),
-        ListTile(title: Text(storeProvider.data()!['categoria'])),
-        ListTile(title: Text(storeProvider.data()!['local'])),
-      ]),
+      body: (storeProvider == null)
+          ? const Center(child: CircularProgressIndicator())
+          : ListView(
+              children: [
+                ListTile(
+                    leading: const CircleAvatar(
+                      child: Icon(Icons.store),
+                      radius: 24,
+                    ),
+                    title: Text(storeProvider.nome)),
+                ListTile(title: Text(storeProvider.categoria)),
+                ListTile(title: Text(storeProvider.cnpj)),
+                ListTile(title: Text(storeProvider.local)),
+                ListTile(title: Text(storeProvider.uid)),
+              ],
+            ),
     );
   }
 }

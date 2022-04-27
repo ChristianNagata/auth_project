@@ -1,4 +1,5 @@
 import 'package:auth_project/layers/domain/entities/product_entity.dart';
+import 'package:auth_project/layers/domain/entities/store_entity.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
@@ -39,7 +40,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) =>
             StreamProvider.value(
               value: GetIt.I.get<StoreController>().getStoreInformation(),
-              initialData: const <DocumentSnapshot>{},
+              initialData: null,
               child: const Profile(),));
       case '/products':
         return MaterialPageRoute(
@@ -65,13 +66,13 @@ class RouteGenerator {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('! ERROR'),
+          title: const Text('! ERR0R'),
           elevation: 0,
           toolbarHeight: 80,
         ),
         body: const Center(
           child: Text(
-            '! ERROR',
+            '! ERR0R',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 24,

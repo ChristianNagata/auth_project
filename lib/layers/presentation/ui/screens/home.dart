@@ -41,16 +41,7 @@ class Home extends StatelessWidget {
                   style: Theme.of(context).elevatedButtonTheme.style,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 48),
-                child: ElevatedButton(
-                  onPressed: () {
-                    FirebaseCrashlytics.instance.crash();
-                  },
-                  child: const Text('Crash test'),
-                  style: Theme.of(context).elevatedButtonTheme.style,
-                ),
-              ),
+
               Padding(
                 padding: const EdgeInsets.only(top: 48),
                 child: ElevatedButton(
@@ -58,6 +49,28 @@ class Home extends StatelessWidget {
                     Navigator.of(context).pushNamed('/products');
                   },
                   child: const Text('Products'),
+                  style: Theme.of(context).elevatedButtonTheme.style,
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 48),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/somethingElse');
+                  },
+                  child: const Text('Page not found'),
+                  style: Theme.of(context).elevatedButtonTheme.style,
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 48),
+                child: ElevatedButton(
+                  onPressed: () {
+                    FirebaseCrashlytics.instance.crash();
+                  },
+                  child: const Text('Crash test'),
                   style: Theme.of(context).elevatedButtonTheme.style,
                 ),
               ),

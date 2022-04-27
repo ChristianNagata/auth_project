@@ -1,7 +1,6 @@
-import 'package:auth_project/layers/data/dtos/store_dto.dart';
+import 'package:auth_project/layers/domain/entities/store_entity.dart';
 import 'package:auth_project/layers/domain/usecases/store_usecases/get_store_information_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/store_usecases/register_store_usecase.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StoreController {
   final RegisterStoreUseCase _registerStoreUseCase;
@@ -9,12 +8,11 @@ class StoreController {
 
   StoreController(this._registerStoreUseCase, this._getStoreInformationUseCase);
 
-  Future<void> registerStore(StoreDto store) async {
-    return await _registerStoreUseCase.registerStore(store);
+  Future<void> registerStore(StoreEntity storeEntity) async {
+    return await _registerStoreUseCase.registerStore(storeEntity);
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> getStoreInformation() {
+  Stream<StoreEntity> getStoreInformation() {
     return _getStoreInformationUseCase.getStoreInformation();
   }
-
 }
