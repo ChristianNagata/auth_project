@@ -1,4 +1,5 @@
 import 'package:auth_project/layers/data/datasources/auth_datasource.dart';
+import 'package:auth_project/layers/domain/entities/auth_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthDataSourceFirebaseAuthImp implements AuthDataSource {
@@ -21,13 +22,12 @@ class AuthDataSourceFirebaseAuthImp implements AuthDataSource {
   }
 
   @override
-  Future<bool> signIn({
-    required String email,
-    required String password,
-  }) async {
+  Future<bool> signIn(AuthEntity authEntity) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+        email: authEntity.email,
+        password: authEntity.password,
+      );
       return true;
     } on FirebaseAuthException catch (e) {
       print(e.message);
@@ -36,20 +36,13 @@ class AuthDataSourceFirebaseAuthImp implements AuthDataSource {
   }
 
   @override
-  Future<bool> signUp({
-    required String email,
-    required String password1,
-    required String password2,
-  }) async {
+  Future<bool> signUp(AuthEntity authEntity) async {
     try {
-      if (password1 == password2) {
-        await _firebaseAuth.createUserWithEmailAndPassword(
-            email: email, password: password1);
-        return true;
-      } else {
-        print('The passwords must be equals');
-        return false;
-      }
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: authEntity.email,
+        password: authEntity.password,
+      );
+      return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');

@@ -1,3 +1,4 @@
+import 'package:auth_project/layers/domain/entities/auth_entity.dart';
 import 'package:auth_project/layers/domain/usecases/auth_usecases/get_auth_state_changes_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/auth_usecases/get_current_user_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_in_usecase.dart';
@@ -27,26 +28,15 @@ class AuthController {
     return _getCurrentUserUseCase.getCurrentUser();
   }
 
-  Future<bool> signIn({
-    required String email,
-    required String password,
-  }) async {
-    return await _signInUseCase.signIn(email: email, password: password);
+  Future<bool> signIn(AuthEntity authEntity) async {
+    return await _signInUseCase.signIn(authEntity);
   }
 
   Future<void> signOut() async {
     return await _signOutUseCase.signOut();
   }
 
-  Future<bool> signUp({
-    required String email,
-    required String password1,
-    required String password2,
-  }) async {
-    return await _signUpUseCase.signUp(
-      email: email,
-      password1: password1,
-      password2: password2,
-    );
+  Future<bool> signUp(AuthEntity authEntity) async {
+    return await _signUpUseCase.signUp(authEntity);
   }
 }

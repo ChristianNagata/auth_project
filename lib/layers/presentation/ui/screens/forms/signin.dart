@@ -1,3 +1,4 @@
+import 'package:auth_project/layers/domain/entities/auth_entity.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -68,10 +69,11 @@ class _SignInState extends State<SignIn> {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                   onPressed: () async {
-                    await authController.signIn(
+                    AuthEntity authEntity = AuthEntity(
                       email: emailController.text.trim(),
                       password: passwordController.text.trim(),
-                    )
+                    );
+                    await authController.signIn(authEntity)
                         ? Navigator.of(context).pushNamed('/')
                         : null;
                   },

@@ -1,4 +1,5 @@
 import 'package:auth_project/layers/data/datasources/auth_datasource.dart';
+import 'package:auth_project/layers/domain/entities/auth_entity.dart';
 import 'package:auth_project/layers/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -16,11 +17,8 @@ class AuthRepositoryImp implements AuthRepository {
   Stream<User?> get authStateChanges => _authDataSource.authStateChanges;
 
   @override
-  Future<bool> signIn({
-    required String email,
-    required String password,
-  }) async {
-    return await _authDataSource.signIn(email: email, password: password);
+  Future<bool> signIn(AuthEntity authEntity) async {
+    return await _authDataSource.signIn(authEntity);
   }
 
   @override
@@ -29,15 +27,7 @@ class AuthRepositoryImp implements AuthRepository {
   }
 
   @override
-  Future<bool> signUp({
-    required String email,
-    required String password1,
-    required String password2,
-  }) async {
-    return await _authDataSource.signUp(
-      email: email,
-      password1: password1,
-      password2: password2,
-    );
+  Future<bool> signUp(AuthEntity authEntity) async {
+    return await _authDataSource.signUp(authEntity);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:auth_project/layers/domain/entities/auth_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -90,14 +91,17 @@ class _SignUpState extends State<SignUp> {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                     onPressed: () async {
-                      await authController.signUp(
+                      AuthEntity authEntity = AuthEntity(
                         email: emailController.text.trim(),
-                        password1: password1Controller.text.trim(),
+                        password: password1Controller.text.trim(),
                         password2: password2Controller.text.trim(),
-                      )
-                          ? Navigator.of(context)
-                              .pushNamed('/storeRegistration')
-                          : null;
+                      );
+                      if (authEntity.passwordsEquals()) {
+                        await authController.signUp(authEntity)
+                            ? Navigator.of(context)
+                                .pushNamed('/storeRegistration')
+                            : null;
+                      }
                     },
                     child: const Text('Próximo'),
                     style: Theme.of(context).elevatedButtonTheme.style),
