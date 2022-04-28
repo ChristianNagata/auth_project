@@ -6,10 +6,11 @@ import '../../controllers/auth_controller.dart';
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
   AuthController authController = GetIt.I.get<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async => true,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Home'),

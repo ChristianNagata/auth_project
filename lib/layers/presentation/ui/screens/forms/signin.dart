@@ -74,7 +74,10 @@ class _SignInState extends State<SignIn> {
                       password: passwordController.text.trim(),
                     );
                     await authController.signIn(authEntity)
-                        ? Navigator.of(context).pushReplacementNamed('/home')
+                        ? Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/home',
+                            (Route<dynamic> route) => false,
+                          )
                         : null;
                   },
                   child: const Text('Entrar'),

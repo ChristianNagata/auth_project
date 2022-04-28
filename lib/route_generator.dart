@@ -1,9 +1,7 @@
 import 'package:auth_project/layers/domain/entities/product_entity.dart';
-import 'package:auth_project/layers/domain/entities/store_entity.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
@@ -25,21 +23,18 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(
-            builder: (_) => (currentUser == null) ? const Welcome() : Home());
+        return (currentUser == null)
+            ? MaterialPageRoute(builder: (_) => const Welcome())
+            : MaterialPageRoute(builder: (_) => Home());
       case '/signIn':
-        return MaterialPageRoute(
-            builder: (_) => (currentUser == null) ? const SignIn() : Home());
+        return MaterialPageRoute(builder: (_) => const SignIn());
       case '/signUp':
-        return MaterialPageRoute(
-            builder: (_) => (currentUser == null) ? const SignUp() : Home());
+        return MaterialPageRoute(builder: (_) => const SignUp());
       case '/storeRegistration':
-        return MaterialPageRoute(
-            builder: (_) =>
-                (currentUser == null) ? const StoreRegistration() : Home());
+        return MaterialPageRoute(builder: (_) => const StoreRegistration());
+
       case '/home':
-        return MaterialPageRoute(
-            builder: (_) => (currentUser != null) ? Home() : const Welcome());
+        return MaterialPageRoute(builder: (_) => Home());
       case '/profile':
         return MaterialPageRoute(
             builder: (_) => StreamProvider.value(

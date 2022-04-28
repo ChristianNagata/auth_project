@@ -1,5 +1,8 @@
+import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/route_generator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class AuthProject extends StatelessWidget {
   const AuthProject({Key? key}) : super(key: key);
