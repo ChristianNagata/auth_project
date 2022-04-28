@@ -28,27 +28,32 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => (currentUser == null) ? const Welcome() : Home());
       case '/signIn':
-        return MaterialPageRoute(builder: (_) => const SignIn());
+        return MaterialPageRoute(
+            builder: (_) => (currentUser == null) ? const SignIn() : Home());
       case '/signUp':
-        return MaterialPageRoute(builder: (_) => const SignUp());
+        return MaterialPageRoute(
+            builder: (_) => (currentUser == null) ? const SignUp() : Home());
       case '/storeRegistration':
-        return MaterialPageRoute(builder: (_) => const StoreRegistration());
+        return MaterialPageRoute(
+            builder: (_) =>
+                (currentUser == null) ? const StoreRegistration() : Home());
       case '/home':
         return MaterialPageRoute(
             builder: (_) => (currentUser != null) ? Home() : const Welcome());
       case '/profile':
-        return MaterialPageRoute(builder: (_) =>
-            StreamProvider.value(
-              value: GetIt.I.get<StoreController>().getStoreInformation(),
-              initialData: null,
-              child: const Profile(),));
+        return MaterialPageRoute(
+            builder: (_) => StreamProvider.value(
+                  value: GetIt.I.get<StoreController>().getStoreInformation(),
+                  initialData: null,
+                  child: const Profile(),
+                ));
+
       case '/products':
         return MaterialPageRoute(
-            builder: (_) =>
-                StreamProvider.value(
-                    value: GetIt.I.get<ProductController>().getAllProducts(),
-                    initialData: const <ProductEntity>[],
-                    child: const Products()));
+            builder: (_) => StreamProvider.value(
+                value: GetIt.I.get<ProductController>().getAllProducts(),
+                initialData: const <ProductEntity>[],
+                child: const Products()));
       case '/productForm':
         return MaterialPageRoute(builder: (_) => ProductForm());
       case '/editProductForm':

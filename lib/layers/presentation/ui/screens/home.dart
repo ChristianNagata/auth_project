@@ -8,70 +8,73 @@ class Home extends StatelessWidget {
   AuthController authController = GetIt.I.get<AuthController>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        elevation: 0,
-        toolbarHeight: 80,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 64),
-          child: Center(
-              child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 48),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/profile');
-                  },
-                  child: const Text('Profile'),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Home'),
+          elevation: 0,
+          toolbarHeight: 80,
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 64),
+            child: Center(
+                child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 48),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/profile');
+                    },
+                    child: const Text('Profile'),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 48),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    await authController.signOut();
-                    Navigator.of(context).pushNamed('/');
-                  },
-                  child: const Text('Sign out'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 48),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await authController.signOut();
+                      Navigator.of(context).pushReplacementNamed('/');
+                    },
+                    child: const Text('Sign out'),
+                  ),
                 ),
-              ),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 48),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/products');
-                  },
-                  child: const Text('Products'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 48),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/products');
+                    },
+                    child: const Text('Products'),
+                  ),
                 ),
-              ),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 48),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/somethingElse');
-                  },
-                  child: const Text('Page not found'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 48),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/somethingElse');
+                    },
+                    child: const Text('Page not found'),
+                  ),
                 ),
-              ),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 48),
-                child: ElevatedButton(
-                  onPressed: () {
-                    FirebaseCrashlytics.instance.crash();
-                  },
-                  child: const Text('Crash test'),
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.orangeAccent)),
+                Padding(
+                  padding: const EdgeInsets.only(top: 48),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      FirebaseCrashlytics.instance.crash();
+                    },
+                    child: const Text('Crash test'),
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.orangeAccent)),
+                  ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            )),
+          ),
         ),
       ),
     );
