@@ -10,16 +10,10 @@ import 'package:auth_project/layers/data/repositories/store_repository_imp.dart'
 import 'package:auth_project/layers/domain/repositories/products_repository.dart';
 import 'package:auth_project/layers/domain/repositories/auth_repository.dart';
 import 'package:auth_project/layers/domain/repositories/store_repository.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/auth_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/auth_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/product_usecases/delete_item_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/product_usecases/delete_item_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/product_usecases/get_all_products_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/product_usecases/get_all_products_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/product_usecases/save_product%20_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/product_usecases/save_product_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/product_usecases/update_product_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/product_usecases/update_product_usecase_imp.dart';
+import 'package:auth_project/layers/domain/usecases/auth_usecase/auth_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/auth_usecase/auth_usecase_imp.dart';
+import 'package:auth_project/layers/domain/usecases/product_usecase/product_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/product_usecase/product_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/store_usecases/get_store_information_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/store_usecases/get_store_information_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/store_usecases/register_store_usecase_imp.dart';
@@ -54,23 +48,20 @@ class Inject {
         () => ProductsRepositoryImp(getIt()));
 
     // USECASES
-      // auth_usecases
+      // auth_usecase
     getIt.registerLazySingleton<AuthUseCase>(() => AuthUseCaseImp(getIt()));
 
       // store_usecases
     getIt.registerLazySingleton<RegisterStoreUseCase>(() => RegisterStoreUseCaseImp(getIt()));
     getIt.registerLazySingleton<GetStoreInformationUseCase>(() => GetStoreInformationUseCaseImp(getIt()));
 
-      // product_usecases
-    getIt.registerLazySingleton<GetAllProductsUseCase>(() => GetAllProductsUseCaseImp(getIt()));
-    getIt.registerLazySingleton<DeleteItemUseCase>(() => DeleteItemUseCaseImp(getIt()));
-    getIt.registerLazySingleton<SaveProductUseCase>(() => SaveProductUseCaseImp(getIt()));
-    getIt.registerLazySingleton<UpdateProductUseCase>(() => UpdateProductUseCaseImp(getIt()));
+      // product_usecase
+    getIt.registerLazySingleton<ProductUseCase>(() => ProductUseCaseImp(getIt()));
 
     // CONTROLLERS
     getIt.registerLazySingleton<AuthController>(() => AuthController(getIt()));
     getIt.registerLazySingleton<StoreController>(() => StoreController(getIt(), getIt()));
-    getIt.registerFactory<ProductController>(() => ProductController(getIt(), getIt(), getIt(), getIt()));
+    getIt.registerFactory<ProductController>(() => ProductController(getIt()));
 
   }
 }
