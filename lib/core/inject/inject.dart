@@ -10,20 +10,12 @@ import 'package:auth_project/layers/data/repositories/store_repository_imp.dart'
 import 'package:auth_project/layers/domain/repositories/products_repository.dart';
 import 'package:auth_project/layers/domain/repositories/auth_repository.dart';
 import 'package:auth_project/layers/domain/repositories/store_repository.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/get_auth_state_changes_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/get_auth_state_changes_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_in_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_in_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_out_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_out_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_up_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/sign_up_usecase_imp.dart';
+import 'package:auth_project/layers/domain/usecases/auth_usecases/auth_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/auth_usecases/auth_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/delete_item_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/delete_item_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/get_all_products_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/get_all_products_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/get_current_user_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecases/get_current_user_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/save_product%20_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/save_product_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecases/update_product_usecase.dart';
@@ -63,11 +55,7 @@ class Inject {
 
     // USECASES
       // auth_usecases
-    getIt.registerLazySingleton<GetCurrentUserUseCase>(() => GetCurrentUserUseCaseImp(getIt()));
-    getIt.registerLazySingleton<GetAuthStateChangesUseCase>(() => GetAuthStateChangesUseCaseImp(getIt()));
-    getIt.registerLazySingleton<SignInUseCase>(() => SignInUseCaseImp(getIt()));
-    getIt.registerLazySingleton<SignOutUseCase>(() => SignOutUseCaseImp(getIt()));
-    getIt.registerLazySingleton<SignUpUseCase>(() => SignUpUseCaseImp(getIt()));
+    getIt.registerLazySingleton<AuthUseCase>(() => AuthUseCaseImp(getIt()));
 
       // store_usecases
     getIt.registerLazySingleton<RegisterStoreUseCase>(() => RegisterStoreUseCaseImp(getIt()));
@@ -80,7 +68,7 @@ class Inject {
     getIt.registerLazySingleton<UpdateProductUseCase>(() => UpdateProductUseCaseImp(getIt()));
 
     // CONTROLLERS
-    getIt.registerLazySingleton<AuthController>(() => AuthController(getIt(), getIt(), getIt(), getIt(), getIt()));
+    getIt.registerLazySingleton<AuthController>(() => AuthController(getIt()));
     getIt.registerLazySingleton<StoreController>(() => StoreController(getIt(), getIt()));
     getIt.registerFactory<ProductController>(() => ProductController(getIt(), getIt(), getIt(), getIt()));
 
