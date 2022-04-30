@@ -14,10 +14,8 @@ import 'package:auth_project/layers/domain/usecases/auth_usecase/auth_usecase.da
 import 'package:auth_project/layers/domain/usecases/auth_usecase/auth_usecase_imp.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecase/product_usecase.dart';
 import 'package:auth_project/layers/domain/usecases/product_usecase/product_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/store_usecases/get_store_information_usecase.dart';
-import 'package:auth_project/layers/domain/usecases/store_usecases/get_store_information_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/store_usecases/register_store_usecase_imp.dart';
-import 'package:auth_project/layers/domain/usecases/store_usecases/register_store_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/store_usecase/store_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/store_usecase/store_usecase_imp.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
@@ -32,35 +30,26 @@ class Inject {
     // Ordem: do mais interno ao mais externo
     // FIRESTORE
     getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
-    getIt.registerLazySingleton<FirebaseFirestore>(
-        () => FirebaseFirestore.instance);
+    getIt.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
 
     // DATASOURCES
     getIt.registerLazySingleton<AuthDataSource>(() => AuthDataSourceFirebaseAuthImp(getIt()));
     getIt.registerLazySingleton<StoreDataSource>(() => StoreDataSourceFirestoreImp(getIt(), getIt()));
-    getIt.registerLazySingleton<ProductsDataSource>(
-        () => ProductsDataSourceFirestoreImp(getIt(), getIt()));
+    getIt.registerLazySingleton<ProductsDataSource>(() => ProductsDataSourceFirestoreImp(getIt(), getIt()));
 
     // REPOSITORIES
     getIt.registerLazySingleton<AuthRepository>(() => AuthRepositoryImp(getIt()));
     getIt.registerLazySingleton<StoreRepository>(() => StoreRepositoryImp(getIt()));
-    getIt.registerLazySingleton<ProductsRepository>(
-        () => ProductsRepositoryImp(getIt()));
+    getIt.registerLazySingleton<ProductsRepository>(() => ProductsRepositoryImp(getIt()));
 
     // USECASES
-      // auth_usecase
     getIt.registerLazySingleton<AuthUseCase>(() => AuthUseCaseImp(getIt()));
-
-      // store_usecases
-    getIt.registerLazySingleton<RegisterStoreUseCase>(() => RegisterStoreUseCaseImp(getIt()));
-    getIt.registerLazySingleton<GetStoreInformationUseCase>(() => GetStoreInformationUseCaseImp(getIt()));
-
-      // product_usecase
+    getIt.registerLazySingleton<StoreUseCase>(() => StoreUseCaseImp(getIt()));
     getIt.registerLazySingleton<ProductUseCase>(() => ProductUseCaseImp(getIt()));
 
     // CONTROLLERS
     getIt.registerLazySingleton<AuthController>(() => AuthController(getIt()));
-    getIt.registerLazySingleton<StoreController>(() => StoreController(getIt(), getIt()));
+    getIt.registerLazySingleton<StoreController>(() => StoreController(getIt()));
     getIt.registerFactory<ProductController>(() => ProductController(getIt()));
 
   }
