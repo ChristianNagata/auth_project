@@ -14,8 +14,20 @@ class ProductController {
     return await _productUseCase.deleteItem(productId);
   }
 
-  Future<void> saveProduct(ProductEntity product) async {
-    return await _productUseCase.saveProduct(product);
+  Future<void> saveProduct({
+    required String nome,
+    required double preco,
+    required String cor,
+    required String descricao,
+    required int estoque,
+  }) async {
+    return await _productUseCase.saveProduct(
+      nome: nome,
+      preco: preco,
+      cor: cor,
+      descricao: descricao,
+      estoque: estoque,
+    );
   }
 
   Future<void> updateProduct(ProductEntity product) async {

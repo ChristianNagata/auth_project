@@ -1,4 +1,3 @@
-import 'package:auth_project/layers/domain/entities/product_entity.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -89,15 +88,13 @@ class ProductForm extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                   onPressed: () async {
-                    ProductEntity product = ProductEntity(
-                      id: uuid.v4(),
+                    await productController.saveProduct(
                       nome: nome,
                       preco: preco,
-                      estoque: estoque,
                       cor: cor,
                       descricao: descricao,
+                      estoque: estoque,
                     );
-                    await productController.saveProduct(product);
                     Navigator.pop(context);
                   },
                   child: const Text('Salvar'),
