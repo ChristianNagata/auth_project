@@ -14,5 +14,4 @@ class ProductEntity {
     required this.cor,
     required this.descricao,
   });
-
 }

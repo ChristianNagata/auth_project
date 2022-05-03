@@ -2,7 +2,7 @@
 
 import 'package:auth_project/layers/domain/entities/auth_entity.dart';
 import 'package:auth_project/layers/domain/repositories/auth_repository.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecase/auth_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/auth_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthUseCaseImp implements AuthUseCase {

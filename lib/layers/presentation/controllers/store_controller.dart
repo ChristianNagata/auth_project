@@ -1,5 +1,5 @@
 import 'package:auth_project/layers/domain/entities/store_entity.dart';
-import 'package:auth_project/layers/domain/usecases/store_usecase/store_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/store_usecase.dart';
 
 class StoreController {
   final StoreUseCase _storeUseCase;
