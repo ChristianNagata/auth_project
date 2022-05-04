@@ -5,6 +5,6 @@ abstract class AuthUseCase {
   User? getCurrentUser();
   Stream<User?> get authStateChanges;
   Future<void> signOut();
-  Future<bool> signIn(AuthEntity authEntity);
+  Future<bool> signIn({required String email, required String password});
   Future<bool> signUp(AuthEntity authEntity);
 }

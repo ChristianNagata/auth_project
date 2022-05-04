@@ -13,8 +13,8 @@ class AuthController {
     return _authUseCase.getCurrentUser();
   }
 
-  Future<bool> signIn(AuthEntity authEntity) async {
-    return await _authUseCase.signIn(authEntity);
+  Future<bool> signIn({required String email, required String password}) async {
+    return await _authUseCase.signIn(email: email, password: password);
   }
 
   Future<void> signOut() async {

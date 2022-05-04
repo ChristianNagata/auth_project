@@ -18,7 +18,8 @@ class AuthUseCaseImp implements AuthUseCase {
   }
 
   @override
-  Future<bool> signIn(AuthEntity authEntity) async {
+  Future<bool> signIn({required String email, required String password}) async {
+    AuthEntity authEntity = AuthEntity(email: email, password: password);
     return await _authRepository.signIn(authEntity);
   }
 

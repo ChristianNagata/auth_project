@@ -12,7 +12,10 @@ class ProductsDataSourceFirestoreImp implements ProductsDataSource {
 
   @override
   Stream<List<ProductEntity>> getAllProducts() {
-    return _firebaseFirestore.collection('produtos').snapshots().map(
+    return _firebaseFirestore
+        .collection('produtos')
+        .snapshots()
+        .map(
         (snapshot) => snapshot.docs
             .map((document) => ProductDto.fromMap(document.data()))
             .toList());

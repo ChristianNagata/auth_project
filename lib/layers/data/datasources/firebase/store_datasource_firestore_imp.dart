@@ -18,15 +18,6 @@ class StoreDataSourceFirestoreImp implements StoreDataSource {
         .set(storeDto.toMap());
   }
 
-  // @override
-  // Stream<StoreEntity> getStoreInformation() {
-  //   return _firebaseFirestore
-  //       .collection('lojas')
-  //       .doc(_firebaseAuth.currentUser!.uid)
-  //       .snapshots()
-  //       .map((snapshot) => StoreDto.fromMap(snapshot.data()!).toEntity());
-  // }
-
   @override
   Future<StoreEntity> getStoreInformation() async {
     return await _firebaseFirestore

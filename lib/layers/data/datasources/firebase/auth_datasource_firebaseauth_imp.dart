@@ -40,7 +40,7 @@ class AuthDataSourceFirebaseAuthImp implements AuthDataSource {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: authEntity.email,
-        password: authEntity.password,
+        password: authEntity.password
       );
       return true;
     } on FirebaseAuthException catch (e) {

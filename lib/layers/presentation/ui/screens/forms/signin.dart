@@ -69,11 +69,10 @@ class _SignInState extends State<SignIn> {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                   onPressed: () async {
-                    AuthEntity authEntity = AuthEntity(
+                    await authController.signIn(
                       email: emailController.text.trim(),
                       password: passwordController.text.trim(),
-                    );
-                    await authController.signIn(authEntity)
+                    )
                         ? Navigator.of(context).pushNamedAndRemoveUntil(
                             '/home',
                             (Route<dynamic> route) => false,
