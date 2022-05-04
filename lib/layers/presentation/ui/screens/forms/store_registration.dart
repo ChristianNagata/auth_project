@@ -85,14 +85,12 @@ class _SignUpState extends State<StoreRegistration> {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                     onPressed: () async {
-                      StoreEntity storeEntity = StoreEntity(
-                        uid: authController.getCurrentUser()!.uid,
+                      await storeController.registerStore(
                         nome: storeNameController.text.trim(),
                         categoria: storeCategoryController.text.trim(),
                         cnpj: storeCNPJController.text.trim(),
                         local: storeLocalController.text.trim(),
                       );
-                      await storeController.registerStore(storeEntity);
                       Navigator.of(context).pushNamed('/home');
                     },
                     child: const Text('Cadastrar'),

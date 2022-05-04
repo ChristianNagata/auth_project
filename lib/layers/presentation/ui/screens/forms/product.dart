@@ -1,6 +1,9 @@
+import 'package:auth_project/layers/domain/entities/store_entity.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
+import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductForm extends StatelessWidget {
@@ -16,6 +19,7 @@ class ProductForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var productController = GetIt.I.get<ProductController>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product form'),

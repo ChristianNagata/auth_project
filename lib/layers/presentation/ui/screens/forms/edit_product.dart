@@ -14,6 +14,7 @@ class EditProductForm extends StatelessWidget {
     ProductController productController = GetIt.I.get<ProductController>();
 
     String id = productEntity.id;
+    String storeId = productEntity.storeId;
     String nome = productEntity.nome;
     double preco = productEntity.preco;
     String cor = productEntity.cor;
@@ -103,15 +104,15 @@ class EditProductForm extends StatelessWidget {
                       child: ElevatedButton(
                         child: const Text('Salvar'),
                         onPressed: () async {
-                          ProductEntity product = ProductEntity(
+                          await productController.updateProduct(ProductEntity(
                             id: id,
+                            storeId: storeId,
                             nome: nome,
                             preco: preco,
                             estoque: estoque,
                             cor: cor,
                             descricao: descricao,
-                          );
-                          await productController.updateProduct(product);
+                          ));
                           Navigator.pop(context);
                         },
                       ),

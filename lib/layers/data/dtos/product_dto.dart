@@ -3,6 +3,7 @@ import 'package:auth_project/layers/domain/entities/product_entity.dart';
 class ProductDto extends ProductEntity {
   ProductDto({
     required String id,
+    required String storeId,
     required String nome,
     required double preco,
     required int estoque,
@@ -10,6 +11,7 @@ class ProductDto extends ProductEntity {
     required String descricao,
   }) : super(
             id: id,
+            storeId: storeId,
             nome: nome,
             preco: preco,
             estoque: estoque,
@@ -19,6 +21,7 @@ class ProductDto extends ProductEntity {
   ProductEntity toEntity() {
     return ProductEntity(
       id: id,
+      storeId: storeId,
       nome: nome,
       preco: preco,
       estoque: estoque,
@@ -30,6 +33,7 @@ class ProductDto extends ProductEntity {
   factory ProductDto.fromEntity(ProductEntity entity) {
     return ProductDto(
       id: entity.id,
+      storeId: entity.storeId,
       nome: entity.nome,
       preco: entity.preco,
       estoque: entity.estoque,
@@ -41,6 +45,7 @@ class ProductDto extends ProductEntity {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'storeId': storeId,
       'nome': nome,
       'preco': preco,
       'estoque': estoque,
@@ -52,6 +57,7 @@ class ProductDto extends ProductEntity {
   factory ProductDto.fromMap(Map<String, dynamic> map) {
     return ProductDto(
       id: map['id'],
+      storeId: map['storeId'],
       nome: map['nome'],
       preco: map['preco'],
       estoque: map['estoque'],

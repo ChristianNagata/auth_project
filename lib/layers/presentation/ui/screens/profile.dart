@@ -1,5 +1,7 @@
 import 'package:auth_project/layers/domain/entities/store_entity.dart';
+import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
@@ -7,7 +9,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StoreEntity? storeProvider = Provider.of(context);
+    StoreEntity? store = Provider.of<StoreEntity?>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -15,7 +17,7 @@ class Profile extends StatelessWidget {
         elevation: 0,
         toolbarHeight: 80,
       ),
-      body: (storeProvider == null)
+      body: (store == null)
           ? const Center(child: CircularProgressIndicator())
           : ListView(
               children: [
@@ -24,11 +26,11 @@ class Profile extends StatelessWidget {
                       child: Icon(Icons.store),
                       radius: 24,
                     ),
-                    title: Text(storeProvider.nome)),
-                ListTile(title: Text(storeProvider.categoria)),
-                ListTile(title: Text(storeProvider.cnpj)),
-                ListTile(title: Text(storeProvider.local)),
-                ListTile(title: Text(storeProvider.uid)),
+                    title: Text(store.nome)),
+                ListTile(title: Text(store.categoria)),
+                ListTile(title: Text(store.cnpj)),
+                ListTile(title: Text(store.local)),
+                ListTile(title: Text(store.uid)),
               ],
             ),
     );

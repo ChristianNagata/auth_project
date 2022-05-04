@@ -14,8 +14,8 @@ class StoreRepositoryImp implements StoreRepository {
   }
 
   @override
-  Stream<StoreEntity> getStoreInformation() {
-    return _storeDataSource.getStoreInformation();
+  Future<StoreEntity> getStoreInformation() async {
+    return await _storeDataSource.getStoreInformation();
   }
 
 }

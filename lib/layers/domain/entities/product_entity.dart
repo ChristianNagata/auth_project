@@ -1,5 +1,6 @@
 class ProductEntity {
   String id;
+  String storeId;
   String nome;
   double preco;
   int estoque;
@@ -8,6 +9,7 @@ class ProductEntity {
 
   ProductEntity({
     required this.id,
+    required this.storeId,
     required this.nome,
     required this.preco,
     required this.estoque,

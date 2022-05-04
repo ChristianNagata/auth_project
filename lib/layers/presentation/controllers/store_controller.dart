@@ -6,11 +6,21 @@ class StoreController {
 
   StoreController(this._storeUseCase);
 
-  Stream<StoreEntity> getStoreInformation() {
-    return _storeUseCase.getStoreInformation();
+  Future<StoreEntity> getStoreInformation() async {
+    return await _storeUseCase.getStoreInformation();
   }
 
-  Future<void> registerStore(StoreEntity storeEntity) async {
-    return await _storeUseCase.registerStore(storeEntity);
+  Future<void> registerStore({
+    required String nome,
+    required String categoria,
+    required String cnpj,
+    required String local,
+  }) async {
+    return await _storeUseCase.registerStore(
+      nome: nome,
+      categoria: categoria,
+      cnpj: cnpj,
+      local: local,
+    );
   }
 }

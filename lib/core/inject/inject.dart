@@ -35,7 +35,7 @@ class Inject {
     // DATASOURCES
     getIt.registerLazySingleton<AuthDataSource>(() => AuthDataSourceFirebaseAuthImp(getIt()));
     getIt.registerLazySingleton<StoreDataSource>(() => StoreDataSourceFirestoreImp(getIt(), getIt()));
-    getIt.registerLazySingleton<ProductsDataSource>(() => ProductsDataSourceFirestoreImp(getIt(), getIt()));
+    getIt.registerLazySingleton<ProductsDataSource>(() => ProductsDataSourceFirestoreImp(getIt()));
 
     // REPOSITORIES
     getIt.registerLazySingleton<AuthRepository>(() => AuthRepositoryImp(getIt()));
@@ -44,8 +44,8 @@ class Inject {
 
     // USECASES
     getIt.registerLazySingleton<AuthUseCase>(() => AuthUseCaseImp(getIt()));
-    getIt.registerLazySingleton<StoreUseCase>(() => StoreUseCaseImp(getIt()));
-    getIt.registerLazySingleton<ProductUseCase>(() => ProductUseCaseImp(getIt()));
+    getIt.registerLazySingleton<StoreUseCase>(() => StoreUseCaseImp(getIt(), getIt()));
+    getIt.registerLazySingleton<ProductUseCase>(() => ProductUseCaseImp(getIt(), getIt()));
 
     // CONTROLLERS
     getIt.registerLazySingleton<AuthController>(() => AuthController(getIt()));

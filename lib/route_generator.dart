@@ -1,4 +1,5 @@
 import 'package:auth_project/layers/domain/entities/product_entity.dart';
+import 'package:auth_project/layers/domain/entities/store_entity.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/product_controller.dart';
 import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
@@ -37,11 +38,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Home());
       case '/profile':
         return MaterialPageRoute(
-            builder: (_) => StreamProvider.value(
-                  value: GetIt.I.get<StoreController>().getStoreInformation(),
-                  initialData: null,
-                  child: const Profile(),
-                ));
+            builder: (_) => FutureProvider.value(value: GetIt.I.get<StoreController>().getStoreInformation(),
+            initialData: null,
+            child: const Profile()));
 
       case '/products':
         return MaterialPageRoute(

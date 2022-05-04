@@ -3,5 +3,6 @@ import 'package:auth_project/layers/domain/entities/store_entity.dart';
 
 abstract class StoreDataSource {
   Future<void> registerStore(StoreDto store);
-  Stream<StoreEntity> getStoreInformation();
+  Future<StoreEntity> getStoreInformation();
+  // Stream<StoreEntity> getStoreInformation();
 }
