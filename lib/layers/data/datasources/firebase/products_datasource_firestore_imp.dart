@@ -1,6 +1,4 @@
 import 'package:auth_project/layers/data/datasources/products_datasource.dart';
-import 'package:auth_project/layers/data/dtos/product_dto.dart';
-import 'package:auth_project/layers/domain/entities/product_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductsDataSourceFirestoreImp implements ProductsDataSource {
@@ -11,14 +9,11 @@ class ProductsDataSourceFirestoreImp implements ProductsDataSource {
   );
 
   @override
-  Stream<List<ProductEntity>> getAllProducts() {
+  Stream<List<Map<String, dynamic>>> getAllProducts() {
     return _firebaseFirestore
         .collection('produtos')
         .snapshots()
-        .map(
-        (snapshot) => snapshot.docs
-            .map((document) => ProductDto.fromMap(document.data()))
-            .toList());
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   @override
@@ -30,18 +25,18 @@ class ProductsDataSourceFirestoreImp implements ProductsDataSource {
   }
 
   @override
-  Future<void> saveProduct(ProductDto product) async {
+  Future<void> saveProduct(Map<String, dynamic> product) async {
     return await _firebaseFirestore
         .collection('produtos')
-        .doc(product.id)
-        .set(product.toMap());
+        .doc(product['id'])
+        .set(product);
   }
 
   @override
-  Future<void> updateProduct(ProductDto product) async {
+  Future<void> updateProduct(Map<String, dynamic> product) async {
     return await _firebaseFirestore
         .collection('produtos')
-        .doc(product.id)
-        .update(product.toMap());
+        .doc(product['id'])
+        .update(product);
   }
 }
