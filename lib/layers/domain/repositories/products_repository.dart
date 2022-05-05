@@ -9,5 +9,5 @@ abstract class ProductsRepository {
 
   Stream<List<ProductEntity>> getAllProducts();
 
-  Stream<List<ProductEntity>> getAllProductsFromStore(String storeId);
+  Future<List<ProductEntity>> getAllProductsFromStore(String storeId);
 }

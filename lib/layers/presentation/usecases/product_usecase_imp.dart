@@ -18,8 +18,10 @@ class ProductUseCaseImp implements ProductUseCase {
   }
 
   @override
-  Stream<List<ProductEntity>> getAllProductsFromStore(String storeId) {
-    return _productsRepository.getAllProductsFromStore(storeId);
+  Future<List<ProductEntity>> getAllProductsFromStore() async {
+    StoreEntity store = await _storeUseCase.getStoreInformation();
+    String storeId = store.id;
+    return await _productsRepository.getAllProductsFromStore(storeId);
   }
 
   @override

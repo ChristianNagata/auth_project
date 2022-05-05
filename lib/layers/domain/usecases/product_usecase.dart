@@ -13,5 +13,5 @@ abstract class ProductUseCase {
   Future<void> updateProduct(ProductEntity product);
   Future<void> deleteItem(String productId);
   Stream<List<ProductEntity>> getAllProducts();
-  Stream<List<ProductEntity>> getAllProductsFromStore(String storeId);
+  Future<List<ProductEntity>> getAllProductsFromStore();
 }

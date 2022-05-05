@@ -16,8 +16,8 @@ class ProductsRepositoryImp implements ProductsRepository {
   }
 
   @override
-  Stream<List<ProductEntity>> getAllProductsFromStore(String storeId) {
-    return _productsDataSource.getAllProductsFromStore(storeId).map(
+  Future<List<ProductEntity>> getAllProductsFromStore(String storeId) async {
+    return await _productsDataSource.getAllProductsFromStore(storeId).then(
         (products) => products
             .map((product) => ProductDto.fromMap(product).toEntity())
             .toList());

@@ -7,5 +7,5 @@ abstract class ProductsDataSource {
 
   Stream<List<Map<String, dynamic>>> getAllProducts();
 
-  Stream<List<Map<String, dynamic>>> getAllProductsFromStore(String storeId);
+  Future<List<Map<String, dynamic>>> getAllProductsFromStore(String storeId);
 }

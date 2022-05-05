@@ -11,8 +11,8 @@ class ProductController {
     return _productUseCase.getAllProducts();
   }
 
-  Stream<List<ProductEntity>> getAllProductsFromStore(String storeId) {
-    return _productUseCase.getAllProductsFromStore(storeId);
+  Future<List<ProductEntity>> getAllProductsFromStore() async {
+    return await _productUseCase.getAllProductsFromStore();
   }
 
   Future<void> deleteItem(String productId) async {

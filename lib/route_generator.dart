@@ -45,9 +45,9 @@ class RouteGenerator {
 
       case '/products':
         return MaterialPageRoute(
-            builder: (_) => StreamProvider.value(
+            builder: (_) => FutureProvider.value(
                 initialData: const <ProductEntity>[],
-                value: GetIt.I.get<ProductController>().getAllProducts(),
+                value: GetIt.I.get<ProductController>().getAllProductsFromStore(),
                 child: const Products()));
       case '/productForm':
         return MaterialPageRoute(builder: (_) => ProductForm());
