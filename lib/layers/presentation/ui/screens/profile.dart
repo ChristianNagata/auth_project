@@ -1,7 +1,5 @@
 import 'package:auth_project/layers/domain/entities/store_entity.dart';
-import 'package:auth_project/layers/presentation/controllers/store_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {

@@ -6,4 +6,6 @@ abstract class ProductsDataSource {
   Future<void> deleteItem(String productId);
 
   Stream<List<Map<String, dynamic>>> getAllProducts();
+
+  Stream<List<Map<String, dynamic>>> getAllProductsFromStore(String storeId);
 }

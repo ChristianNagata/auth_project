@@ -8,4 +8,6 @@ abstract class ProductsRepository {
   Future<void> deleteItem(String productId);
 
   Stream<List<ProductEntity>> getAllProducts();
+
+  Stream<List<ProductEntity>> getAllProductsFromStore(String storeId);
 }

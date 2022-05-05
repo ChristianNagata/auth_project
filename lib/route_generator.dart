@@ -38,15 +38,16 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Home());
       case '/profile':
         return MaterialPageRoute(
-            builder: (_) => FutureProvider.value(value: GetIt.I.get<StoreController>().getStoreInformation(),
-            initialData: null,
-            child: const Profile()));
+            builder: (_) => FutureProvider.value(
+                value: GetIt.I.get<StoreController>().getStoreInformation(),
+                initialData: null,
+                child: const Profile()));
 
       case '/products':
         return MaterialPageRoute(
             builder: (_) => StreamProvider.value(
-                value: GetIt.I.get<ProductController>().getAllProducts(),
                 initialData: const <ProductEntity>[],
+                value: GetIt.I.get<ProductController>().getAllProducts(),
                 child: const Products()));
       case '/productForm':
         return MaterialPageRoute(builder: (_) => ProductForm());

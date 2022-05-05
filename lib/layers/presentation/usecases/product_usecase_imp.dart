@@ -18,6 +18,11 @@ class ProductUseCaseImp implements ProductUseCase {
   }
 
   @override
+  Stream<List<ProductEntity>> getAllProductsFromStore(String storeId) {
+    return _productsRepository.getAllProductsFromStore(storeId);
+  }
+
+  @override
   Future<void> deleteItem(String productId) async {
     return await _productsRepository.deleteItem(productId);
   }

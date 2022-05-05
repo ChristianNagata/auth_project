@@ -17,6 +17,15 @@ class ProductsDataSourceFirestoreImp implements ProductsDataSource {
   }
 
   @override
+  Stream<List<Map<String, dynamic>>> getAllProductsFromStore(String storeId) {
+    return _firebaseFirestore
+        .collection('produtos')
+        .where('storeId', isEqualTo: storeId)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+  }
+
+  @override
   Future<void> deleteItem(String productId) async {
     return await _firebaseFirestore
         .collection('produtos')

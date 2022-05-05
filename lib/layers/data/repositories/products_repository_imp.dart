@@ -16,6 +16,14 @@ class ProductsRepositoryImp implements ProductsRepository {
   }
 
   @override
+  Stream<List<ProductEntity>> getAllProductsFromStore(String storeId) {
+    return _productsDataSource.getAllProductsFromStore(storeId).map(
+        (products) => products
+            .map((product) => ProductDto.fromMap(product).toEntity())
+            .toList());
+  }
+
+  @override
   Future<void> deleteItem(String productId) async {
     return await _productsDataSource.deleteItem(productId);
   }
