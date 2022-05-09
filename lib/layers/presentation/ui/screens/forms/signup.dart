@@ -1,4 +1,5 @@
 import 'package:auth_project/layers/domain/entities/auth_entity.dart';
+import 'package:auth_project/layers/presentation/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -13,6 +14,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   AuthController authController = GetIt.I.get<AuthController>();
+  UserController userController = GetIt.I.get<UserController>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
@@ -51,24 +53,22 @@ class _SignUpState extends State<SignUp> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: Row(
-                  children: [
-                    TextField(
-                      controller: firstNameController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'First name',
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    TextField(
-                      controller: lastNameController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Last name',
-                      ),
-                    ),
-                  ],
+                child: TextField(
+                  controller: firstNameController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'First name',
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: TextField(
+                  controller: lastNameController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Last name',
+                  ),
                 ),
               ),
               Padding(
@@ -115,16 +115,26 @@ class _SignUpState extends State<SignUp> {
                 padding: const EdgeInsets.only(top: 24),
                 child: ElevatedButton(
                   onPressed: () async {
+                    String email = emailController.text.trim();
+                    String firstName = firstNameController.text.trim();
+                    String lastName = lastNameController.text.trim();
+                    String password1 = password1Controller.text.trim();
+                    String password2 = password2Controller.text.trim();
                     AuthEntity authEntity = AuthEntity(
-                      email: emailController.text.trim(),
-                      password: password1Controller.text.trim(),
-                      password2: password2Controller.text.trim(),
+                      email: email,
+                      password: password1,
+                      password2: password2,
                     );
                     if (authEntity.passwordsEquals()) {
-                      await authController.signUp(authEntity)
-                          ? Navigator.of(context)
-                              .pushNamed('/storeRegistration')
-                          : null;
+                      bool response = await authController.signUp(authEntity);
+                      if (response == true) {
+                        await userController.createUser(
+                          email: email,
+                          firstName: firstName,
+                          lastName: lastName,
+                        );
+                        Navigator.of(context).pushNamed('/storeRegistration');
+                      }
                     }
                   },
                   child: const Text('Próximo'),
