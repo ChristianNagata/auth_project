@@ -10,6 +10,7 @@ void main() {
       estoque: 123,
       cor: 'Preto',
       descricao: 'Produto teste preto',
+      storeId: '1234567890',
     );
 
     expect(productEntity, isNotNull);

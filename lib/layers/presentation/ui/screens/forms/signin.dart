@@ -1,4 +1,3 @@
-import 'package:auth_project/layers/domain/entities/auth_entity.dart';
 import 'package:auth_project/layers/presentation/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';

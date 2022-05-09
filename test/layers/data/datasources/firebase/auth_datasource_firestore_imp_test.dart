@@ -5,13 +5,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   group('From a specific user', () {
     final ProductsDataSourceFirestoreImp _dataSourceFirestoreImp =
         ProductsDataSourceFirestoreImp(
       _firebaseFirestore,
-      _firebaseAuth,
     );
     test('get all products', () {
       _dataSourceFirestoreImp.getAllProducts();

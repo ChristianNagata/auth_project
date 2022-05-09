@@ -8,7 +8,7 @@ void main() {
       nome: 'Loja Teste',
       categoria: 'Categoria Teste',
       cnpj: '11111111111',
-      local: 'Local teste',
+      local: 'Local teste', id: '1234567890',
     );
 
     expect(storeEntity, isNotNull);
