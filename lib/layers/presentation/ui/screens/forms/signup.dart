@@ -14,6 +14,8 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   AuthController authController = GetIt.I.get<AuthController>();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   final TextEditingController password1Controller = TextEditingController();
   final TextEditingController password2Controller = TextEditingController();
 
@@ -45,6 +47,28 @@ class _SignUpState extends State<SignUp> {
                     border: OutlineInputBorder(),
                     hintText: 'Digite seu email',
                   ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Row(
+                  children: [
+                    TextField(
+                      controller: firstNameController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'First name',
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    TextField(
+                      controller: lastNameController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Last name',
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Padding(
