@@ -1,7 +1,7 @@
 import 'package:auth_project/layers/domain/entities/auth_entity.dart';
 
 class AuthDto extends AuthEntity {
-  AuthDto({
+  const AuthDto({
     required String email,
     required String password,
   }) : super(email: email, password: password);

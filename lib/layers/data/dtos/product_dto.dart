@@ -1,7 +1,7 @@
 import 'package:auth_project/layers/domain/entities/product_entity.dart';
 
 class ProductDto extends ProductEntity {
-  ProductDto({
+  const ProductDto({
     required String id,
     required String storeId,
     required String nome,

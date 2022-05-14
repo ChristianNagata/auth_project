@@ -1,7 +1,7 @@
 import 'package:auth_project/layers/domain/entities/user_entity.dart';
 
 class UserDto extends UserEntity {
-  UserDto({
+  const UserDto({
     required String uid,
     required String firstName,
     required String lastName,

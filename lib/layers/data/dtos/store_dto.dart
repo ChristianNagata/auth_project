@@ -1,7 +1,7 @@
 import 'package:auth_project/layers/domain/entities/store_entity.dart';
 
 class StoreDto extends StoreEntity {
-  StoreDto({
+  const StoreDto({
     required String id,
     required String uid,
     required String nome,
