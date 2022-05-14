@@ -1,13 +1,13 @@
+import 'package:auth_project/core/error/failures.dart';
 import 'package:auth_project/layers/domain/entities/product_entity.dart';
+import 'package:dartz/dartz.dart';
 
 abstract class ProductsRepository {
-  Future<void> saveProduct(ProductEntity product);
+  Future<Either<Failure, bool>> saveProduct(ProductEntity product);
 
-  Future<void> updateProduct(ProductEntity product);
+  Future<Either<Failure, bool>> updateProduct(ProductEntity product);
 
-  Future<void> deleteItem(String productId);
+  Future<Either<Failure, bool>> deleteItem(String productId);
 
-  Stream<List<ProductEntity>> getAllProducts();
-
-  Future<List<ProductEntity>> getAllProductsFromStore(String storeId);
+  Future<Either<Failure, List<ProductEntity>>> getAllProductsFromStore(String storeId);
 }

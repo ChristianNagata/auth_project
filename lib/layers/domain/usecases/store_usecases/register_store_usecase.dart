@@ -1,16 +1,16 @@
 import 'package:auth_project/layers/domain/repositories/store_repository.dart';
-import 'package:auth_project/layers/domain/usecases/auth_usecase.dart';
+import 'package:auth_project/layers/domain/usecases/auth_usecases/get_current_user_usecase.dart';
 import 'package:uuid/uuid.dart';
 import '../../entities/store_entity.dart';
 
 class RegisterStoreUseCase {
   final StoreRepository _storeRepository;
-  final AuthUseCase _authUseCase;
+  final GetCurrentUserUseCase _getCurrentUser;
   final Uuid _uuid;
 
   RegisterStoreUseCase(
     this._storeRepository,
-    this._authUseCase,
+    this._getCurrentUser,
     this._uuid,
   );
 
@@ -22,7 +22,7 @@ class RegisterStoreUseCase {
   }) async {
     StoreEntity _storeEntity = StoreEntity(
       id: _uuid.v4(),
-      uid: _authUseCase.getCurrentUser()!.uid,
+      uid: _getCurrentUser()!.uid,
       nome: nome,
       categoria: categoria,
       cnpj: cnpj,

@@ -26,26 +26,29 @@ class ProductsDataSourceFirestoreImp implements ProductsDataSource {
   }
 
   @override
-  Future<void> deleteItem(String productId) async {
-    return await _firebaseFirestore
+  Future<bool> deleteItem(String productId) async {
+    bool response = await _firebaseFirestore
         .collection('produtos')
         .doc(productId)
-        .delete();
+        .delete().then((value) => true);
+    return response;
   }
 
   @override
-  Future<void> saveProduct(Map<String, dynamic> product) async {
-    return await _firebaseFirestore
+  Future<bool> saveProduct(Map<String, dynamic> product) async {
+    bool response = await _firebaseFirestore
         .collection('produtos')
         .doc(product['id'])
-        .set(product);
+        .set(product).then((value) => true);
+    return response;
   }
 
   @override
-  Future<void> updateProduct(Map<String, dynamic> product) async {
-    return await _firebaseFirestore
+  Future<bool> updateProduct(Map<String, dynamic> product) async {
+    bool response = await _firebaseFirestore
         .collection('produtos')
         .doc(product['id'])
-        .update(product);
+        .update(product).then((value) => true);
+    return response;
   }
 }

@@ -1,9 +1,9 @@
 abstract class ProductsDataSource {
-  Future<void> saveProduct(Map<String, dynamic> product);
+  Future<bool> saveProduct(Map<String, dynamic> product);
 
-  Future<void> updateProduct(Map<String, dynamic> product);
+  Future<bool> updateProduct(Map<String, dynamic> product);
 
-  Future<void> deleteItem(String productId);
+  Future<bool> deleteItem(String productId);
 
   Stream<List<Map<String, dynamic>>> getAllProducts();
 
