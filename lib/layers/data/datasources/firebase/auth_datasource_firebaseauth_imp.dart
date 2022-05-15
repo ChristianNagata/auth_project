@@ -17,8 +17,8 @@ class AuthDataSourceFirebaseAuthImp implements AuthDataSource {
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
   @override
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
+  Future<bool> signOut() async {
+    return await _firebaseAuth.signOut().then((value) => true);
   }
 
   @override
